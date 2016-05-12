@@ -1,9 +1,9 @@
-@extends('layouts.masterNewItem')
+@extends('layouts.master')
 
 @section('title')
 
 @endsection
-@section('content')
+@section('contain')
     @include('includes.messageError')
 
     <div class="row">
@@ -50,20 +50,41 @@
                 </div>-->
                 <div class="form-group {{ $errors->has('buyPrice')? 'has-error' : '' }}">
                     <label for="buyPrice">Buying Price of one item</label>
-                    <input class="form-control" type="number" name="buyPrice" id="buyPrice">
+                    <input class="validate" type="" name="buyPrice" id="buyPrice">
                 </div>
                 <div class="form-group {{ $errors->has('sellPrice')? 'has-error' : '' }}">
                     <label for="sellPrice">Selling Price of one item</label>
-                    <input class="form-control" type="number" name="sellPrice" id="sellPrice">
+                    <input class="validate" type="number" name="sellPrice" id="sellPrice">
                 </div>
                 <div class="form-group {{ $errors->has('count')? 'has-error' : '' }}">
-                    <label for="count">Number of Item</label>
-                    <input class="form-control" type="number" name="count" id="count">
+                    <label for="count">Quantity</label>
+                    <input class="validate  " type="number" name="count" id="count">
                 </div>
                 <button type="submit" class="btn btn-primary">ADD</button>
                 <input type="hidden" name="_token" value="{{ Session::token()}}">
             </form>
         </div>
+        <table>
+            <thead>
+            <tr>
+                <th data-field="itemID">Item ID</th>
+                <th data-field="name">Item Name</th>
+                <th data-field="category">Item Category</th>
+                <th data-field="buyPrice">Buying Price</th>
+                <th data-field="sellPrice">Selling Price</th>
+                <th data-field="count">Quantity</th>
+            </tr>
+            </thead>
 
+            <tbody>
+                @foreach($items as $item)
+                    <tr>
+                        <td> {{ $item->  }}</td>
+                        <td>Eclair</td>
+                        <td>$0.87</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 @endsection
