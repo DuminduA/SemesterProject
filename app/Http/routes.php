@@ -14,3 +14,21 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::put('getTotalPrice', [
+    'as' => 'getTotalPrice',
+    'uses' => 'OrderController@getTotalPrice'
+]);
+
+Route::get('index', [
+    'as' => 'index',
+    'uses' => 'pageController@getIndex'
+]);
+
+Route::get('PlaceOrder', [
+    'as' => 'PlaceOrder',
+    'uses' => 'CartController@getPlaceOrder'
+]);
+
+
+
