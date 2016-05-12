@@ -11,24 +11,34 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+
+
+Route::group(['middleware'=>['web']],function(){
+
+//load Signup Form
+    Route::get('/signup', function () {
+        return view('signup');
+    });
+    // Details in signup
+    Route::post('/signup',[
+        'uses'=>'CustomerController@postSignUp',
+        'as'=> 'signup'
+      ]);
+
+    Route::put('getTotalPrice', [
+        'as' => 'getTotalPrice',
+        'uses' => 'OrderController@getTotalPrice'
+    ]);
+
+    Route::get('PlaceOrder', [
+        'as' => 'PlaceOrder',
+        'uses' => 'CartController@getPlaceOrder'
+    ]);
+
 });
 
-Route::put('getTotalPrice', [
-    'as' => 'getTotalPrice',
-    'uses' => 'OrderController@getTotalPrice'
-]);
 
-Route::get('index', [
-    'as' => 'index',
-    'uses' => 'pageController@getIndex'
-]);
-
-Route::get('PlaceOrder', [
-    'as' => 'PlaceOrder',
-    'uses' => 'CartController@getPlaceOrder'
-]);
 
 
 
