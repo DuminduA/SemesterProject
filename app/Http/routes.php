@@ -11,6 +11,24 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => ['web']],function(){
+    Route::get('/', function () {
+        return view('newItem');
+    });
+
+    Route::post('/addNewItem',[
+        'uses' => 'ItemController@addNewItem',
+        'as' => 'addNewItem'
+    ]);
+
+    Route::get('/test',[
+        'uses' => 'ItemController@getTest',
+        'as' => 'test'
+    ]);
+
+    Route::get('/newItem',[
+        'uses' => 'ItemController@getnewItem',
+        'as' => 'newItem'
+    ]);
+
 });
