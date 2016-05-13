@@ -13,7 +13,7 @@ class Item extends Migration
     public function up()
     {
         Schema::create('items', function (Blueprint $table) {
-
+            $table->increments('id');
             $table->string('itemID');
             $table->string('name');
             $table->string('category');

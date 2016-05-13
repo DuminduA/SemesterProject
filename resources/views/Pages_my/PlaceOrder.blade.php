@@ -31,33 +31,36 @@ use App\Http\Controllers\CartController;
                 <div class="card white darken-1">
                     <div class="card-content black-text">
                         <span class="card-title"></span>
-                        <p>Price  :</br>
+                        <p>Price  :{{$totalprice}}</br>
     </p>
                     </div>
                     <div class="card-action">
-                        items :
+                        items :{{$totalitems}}
                     </div>
                 </div>
             </div>
         </div>
 
-  <?/*      <div class="collection">
+       <div class="collection">
 
-            @foreach($CartItems as $name)
-            <a href="#!" class="collection-item">Item : {{$CartItems->$name}}  </br>
-            Qunatity : {{$CartItems->$quantity}}
-                <a id="remove button" class="waves-effect waves-light btn">Remove</a>
+
+            @foreach($CartItems as $item)
+            <a href="#!" class="collection-item">Item : {{$item->name}}  </br>
+            Quantity : {{$item->qunatity}}  </br>
+                Price of Items : {{$item->qunatity*$item->price}}
+
+                <a href="{{route('deletefromCart',['btn_id' =>$item->id])}}" class="waves-effect waves-light btn">Remove</a>
             </a>
-            @endforeach*/?>
+            @endforeach
+
         </div>
 
         <!--order proceed button-->
-    <a id="proceed_btn"class="waves-effect waves-light btn">Proceed the order</a>
-        <button class="btn waves-effect waves-light" type="submit" name="action">Proceed the order
+        <button id="proceed_btn" href="{{route('placeanorder')}}" class="btn waves-effect waves-light" type="submit" name="action">Proceed the order
             <i class="material-icons right">send</i>
         </button>
 
 
 
-@endsection
+ @endsection
 

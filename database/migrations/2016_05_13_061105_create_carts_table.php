@@ -10,10 +10,13 @@ class CreateCartsTable extends Migration
      *
      * @return void
      */
+    
+    //price should be a float value
     public function up()
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->increments('id')->unique()->index();
+            $table->integer('customer_id')->unsigned();
             $table->string('name');
             $table->integer('price')->unsigned();
             $table->integer('qunatity')->unsigned();
@@ -23,6 +26,7 @@ class CreateCartsTable extends Migration
 
         });
     }
+    
 
     /**
      * Reverse the migrations.

@@ -11,24 +11,28 @@ use App\Http\Requests;
 class CartController extends Controller
 {
         public function getPlaceOrder(){
-             $CartItems= array();
-             $nameOfproduct=array();
-             $QuantityOfItems=array();
-             $TotalPrice=100;
-             $TotalItems=5000;
-
-            /*sizeof($CartItems)
-            for($i = 0; $i<2  ;$i++){
-                $TotalPrice = 100;//$CartItems[$i]->price;
-                $TotalItems =+ 1; 
-                $nameOfproduct[$i]= $CartItems[$i]->name;
-                $QuantityOfItems[$i]= $CartItems[$i]->quantity;
-            }*/
+             $TotalPrice=0;
+             $TotalItems=0;
+            $CartItems= Cart::all();
+            
+            for($i = 0; $i<sizeof($CartItems)  ;$i++){
+                $TotalPrice += $CartItems[$i]->price*$CartItems[$i]->qunatity;
+                $TotalItems += 1;
+            }
+            
 
              return view('Pages_my.PlaceOrder')
-              /*  ->with(['totalprice'=> $TotalPrice])
+               ->with(['totalprice'=> $TotalPrice])
                 ->with(['totalitems'=>$TotalItems])
-                ->with(['namesarray'=>$nameOfproduct])
-                ->with(['quntityarray'=>$QuantityOfItems])*/;
+                ->with(['CartItems'=>$CartItems]);
         }
+    
+    public function removeFromCart($btn_id){
+        
+        $ItemToRemove= Cart::where('id',$btn_id)->first();
+        $ItemToRemove->delete();
+        return redirect()->route('PlaceOrder');
+    }
+
+
 }
