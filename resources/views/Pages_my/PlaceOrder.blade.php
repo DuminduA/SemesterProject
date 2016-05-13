@@ -14,6 +14,10 @@ use App\Http\Controllers\CartController;
         right: 20px;
         top:90px;
     }
+    #remove button{
+        position: absolute;
+        right:50px;
+    }
 
 </style>
 
@@ -27,7 +31,7 @@ use App\Http\Controllers\CartController;
                 <div class="card white darken-1">
                     <div class="card-content black-text">
                         <span class="card-title"></span>
-                        <p>Price  :{{$totalprice}}
+                        <p>Price  :</br>
     </p>
                     </div>
                     <div class="card-action">
@@ -37,28 +41,15 @@ use App\Http\Controllers\CartController;
             </div>
         </div>
 
-        <div class="collection">
+  <?/*      <div class="collection">
 
             @foreach($CartItems as $name)
-            <a href="#!" class="collection-item">Item : {{$CartItems->$name}}   </br>
+            <a href="#!" class="collection-item">Item : {{$CartItems->$name}}  </br>
             Qunatity : {{$CartItems->$quantity}}
-
+                <a id="remove button" class="waves-effect waves-light btn">Remove</a>
             </a>
-            @endforeach
+            @endforeach*/?>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         <!--order proceed button-->
     <a id="proceed_btn"class="waves-effect waves-light btn">Proceed the order</a>
