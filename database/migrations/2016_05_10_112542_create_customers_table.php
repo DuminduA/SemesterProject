@@ -24,6 +24,7 @@ class CreateCustomersTable extends Migration
             $table->string('adress2',45);
             $table->string('adress3',45);
             $table->string('adress4',45);
+            $table->rememberToken();
         });
     }
 

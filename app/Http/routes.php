@@ -16,11 +16,7 @@ Route::group(['middleware'=>['web']],function(){
     Route::get('/', function () {
         return view('searchItem');
     });
-
-//load Signup Form
-    Route::get('/signup', function () {
-        return view('signup');
-    });
+    
     // Details in signup
     Route::post('/addNewItem',[
         'uses' => 'ItemController@addNewItem',
@@ -73,6 +69,18 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'CustomerController@postSignUp',
         'as'=> 'signup'
       ]);
+
+    Route::get('/signinform', function () {
+        return view('signinform');
+    });
+    Route::post('/signin',[
+        'uses'=>'CustomerController@postSignin',
+        'as'=> 'signin'
+    ]);
+    Route::get('/dashbord',[
+        'uses'=>"CustomerController@getDashbord",
+        'as'=> "dashbord"
+    ]);
 
     Route::put('getTotalPrice', [
         'as' => 'getTotalPrice',
