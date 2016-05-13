@@ -13,6 +13,10 @@
 
 Route::group(['middleware'=>['web']],function(){
 
+    Route::get('/', function () {
+        return view('searchItem');
+    });
+
 //load Signup Form
     Route::get('/signup', function () {
         return view('signup');
@@ -23,7 +27,6 @@ Route::group(['middleware'=>['web']],function(){
         'as' => 'addNewItem'
     ]);
 
-    
     Route::get('/newItem',[                     //to show the newItem page
         'uses' => 'ItemController@getnewItem',
         'as' => 'newItem'

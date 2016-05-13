@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Item extends Migration
+class CreateItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -21,6 +21,7 @@ class Item extends Migration
             $table->float('sellPrice');
             $table->integer('count');
             $table->rememberToken();
+            $table->timestamps();
         });
     }
 
