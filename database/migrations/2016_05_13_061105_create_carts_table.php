@@ -20,6 +20,7 @@ class CreateCartsTable extends Migration
             $table->timestamps();
 
 
+
         });
     }
 

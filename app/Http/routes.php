@@ -21,6 +21,25 @@ Route::group(['middleware'=>['web']],function(){
         return view('signup');
     });
     // Details in signup
+    Route::post('/addNewItem',[
+        'uses' => 'ItemController@addNewItem',
+        'as' => 'addNewItem'
+    ]);
+
+    Route::get('/test',[
+        'uses' => 'ItemController@getTest',
+        'as' => 'test'
+    ]);
+
+    Route::get('/newItem',[
+        'uses' => 'ItemController@getnewItem',
+        'as' => 'newItem'
+    ]);
+    //open signup form
+    Route::get('/signup', function () {
+        return view('signup');
+    });
+    //signup form filled
     Route::post('/signup',[
         'uses'=>'CustomerController@postSignUp',
         'as'=> 'signup'
@@ -35,10 +54,10 @@ Route::group(['middleware'=>['web']],function(){
         'as' => 'PlaceOrder',
         'uses' => 'CartController@getPlaceOrder'
     ]);
+    Route::get('/', function () {
+        return view('newItem');
+    });
 
 });
-
-
-
 
 
