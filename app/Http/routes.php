@@ -11,14 +11,14 @@
 |
 */
 
+Route::group(['middleware'=>['web']],function(){
 
-Route::group(['middleware' => ['web']],function(){
-
-    Route::get('/', function () {
-        return view('newItem');
+//load Signup Form
+    Route::get('/signup', function () {
+        return view('signup');
     });
-
-    Route::post('/addNewItem',[                 //to add the new item to the table
+    // Details in signup
+    Route::post('/addNewItem',[
         'uses' => 'ItemController@addNewItem',
         'as' => 'addNewItem'
     ]);
@@ -49,7 +49,18 @@ Route::group(['middleware' => ['web']],function(){
         'uses' => 'ItemController@addEditItem',
         'as' => 'addEditItem'
     ]);
-    
+
+    //delete an item from the cart
+    Route::get('/deletefromCart/{btn_id}',[
+        'uses' => 'CartController@removeFromCart',
+        'as' => 'deletefromCart'
+    ]);
+    //place an order
+    Route::get('/placeanorder',[
+        'uses' => 'OrderController@PlaceAnOrder',
+        'as' => 'PlaceAnOrder'
+    ]);
+
     //open signup form
     Route::get('/signup', function () {
         return view('signup');
@@ -60,4 +71,17 @@ Route::group(['middleware' => ['web']],function(){
         'as'=> 'signup'
       ]);
 
+    Route::put('getTotalPrice', [
+        'as' => 'getTotalPrice',
+        'uses' => 'OrderController@getTotalPrice'
+    ]);
+
+    Route::get('PlaceOrder', [
+        'as' => 'PlaceOrder',
+        'uses' => 'CartController@getPlaceOrder'
+    ]);
+
+
 });
+
+
