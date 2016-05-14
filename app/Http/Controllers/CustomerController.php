@@ -6,13 +6,25 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Customer;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class CustomerController extends Controller
 {
+
+    public function getDashbord()
+    {
+        return view('dashbord');
+
+    }
+
     public function postSignUp(Request $request){
 
+
         $this->validate($request,[
-                
+            'email'=> 'required|email|unique:customers',
+            'first_name'=>'required',
+            'last_name'=>'required'
 
         ]);
 
@@ -33,6 +45,18 @@ class CustomerController extends Controller
 
         $customer->save();
         return redirect()-> back();
+
+    }
+    public function postSignIn(Request $request){
+
+        if(Auth::attempt(['email'=>$request['email'],'password'=>$request['password']])){
+            return redirect()->route('dashbord');
+        }
+        else{
+            //$Error=array('error' => 'Password Doesnt match');
+            return Redirect::back()->with('Error',"Email and Password didn't match");
+
+        }
 
     }
 

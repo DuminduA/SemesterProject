@@ -14,6 +14,7 @@
 Route::group(['middleware'=>['web']],function(){
 
 
+
     Route::post('/search',[
         'uses' => 'ItemController@search',
         'as' => 'search'
@@ -29,6 +30,7 @@ Route::group(['middleware'=>['web']],function(){
     Route::get('/signup', function () {
         return view('signup');
     });
+
     // Details in signup
     Route::post('/addNewItem',[
         'uses' => 'ItemController@addNewItem',
@@ -81,6 +83,26 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'CustomerController@postSignUp',
         'as'=> 'signup'
       ]);
+
+    Route::get('/signinform', function () {
+        return view('signinform');
+    });
+    Route::post('/signin',[
+        'uses'=>'CustomerController@postSignin',
+        'as'=> 'signin'
+    ]);
+    Route::get('/dashbord',[
+        'uses'=>"CustomerController@getDashbord",
+        'as'=> "dashbord"
+    ]);
+    Route::get('/staffsignin', function () {
+        return view('staffsignin');
+    });
+    Route::post('/staffsigninaction',[
+        'uses'=>'StaffController@postSignIn',
+        'as'=>'staffsigninaction'
+    ]);
+
 
     Route::put('getTotalPrice', [
         'as' => 'getTotalPrice',
