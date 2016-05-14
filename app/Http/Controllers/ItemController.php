@@ -52,20 +52,14 @@ class ItemController extends Controller{
             'count' => 'required'
         ]);
 
-        $itemID = $request['itemID'];
-        $name = $request['name'];
-        $category = $request['category'];
-        $buyPrice = $request['buyPrice'];
-        $sellPrice = $request['sellPrice'];
-        $count = $request['count'];
-
         $item = new Item();
-        $item->itemID = $itemID;
-        $item->name = $name;
-        $item->category = $category;
-        $item->buyPrice = $buyPrice;
-        $item->sellPrice = $sellPrice;
-        $item->count = $count;
+        $item->itemID = $request['itemID'];
+        $item->name = $request['name'];
+        $item->category = $request['category'];
+        $item->buyPrice = $request['buyPrice'];
+        $item->sellPrice = $request['sellPrice'];
+        $item->count = $request['count'];
+        $request->staff()->item()->save($item);
         $massage = 'There was an error';
         if ($item->save()){
             $massage = 'Item added successfully';
@@ -96,20 +90,14 @@ class ItemController extends Controller{
             'count' => 'required'
         ]);
 
-        $itemID = $request['itemID'];
-        $name = $request['name'];
-        $category = $request['category'];
-        $buyPrice = $request['buyPrice'];
-        $sellPrice = $request['sellPrice'];
-        $count = $request['count'];
-
         $item = new Item();
-        $item->itemID = $itemID;
-        $item->name = $name;
-        $item->category = $category;
-        $item->buyPrice = $buyPrice;
-        $item->sellPrice = $sellPrice;
-        $item->count = $count;
+        $item->itemID = $request['itemID'];
+        $item->name = $request['name'];
+        $item->category = $request['category'];
+        $item->buyPrice = $request['buyPrice'];
+        $item->sellPrice = $request['sellPrice'];
+        $item->count = $request['count'];
+        $item->staff()->item();
         $item->save();
         
         return redirect()->route('updateItems');
