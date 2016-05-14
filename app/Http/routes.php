@@ -36,16 +36,7 @@ Route::group(['middleware'=>['web']],function(){
         'as' => 'newItem'
     ]);
 
-    //delete an item from the cart
-    Route::get('/deletefromCart/{btn_id}',[
-        'uses' => 'CartController@removeFromCart',
-        'as' => 'deletefromCart'
-    ]);
-    //place an order
-    Route::get('/placeanorder',[
-        'uses' => 'OrderController@PlaceAnOrder',
-        'as' => 'PlaceAnOrder'
-    ]);
+
 
     //open signup form
     Route::get('/signup', function () {
@@ -62,13 +53,47 @@ Route::group(['middleware'=>['web']],function(){
         'uses' => 'OrderController@getTotalPrice'
     ]);
 
-    Route::get('PlaceOrder', [
+
+    //calls when remove item from cart
+    Route::get('/PlaceOrder', [
         'as' => 'PlaceOrder',
         'uses' => 'CartController@getPlaceOrder'
     ]);
+
+    
+
     Route::get('/', function () {
         return view('newItem');
     });
+
+
+    Route::get('UpdateOrder', [
+        'as' => 'UpdateOrder',
+        'uses' => 'OrderController@UpdateAnOrder'
+    ]);
+
+
+
+    //delete an item from the cart
+    Route::get('/deletefromCart/{btn_id}',[
+        'uses' => 'CartController@removeFromCart',
+        'as' => 'deletefromCart'
+    ]);
+
+    Route::get('proceedOrder',[
+        'uses' => 'OrderController@PlaceAnOrder',
+        'as' => 'proceedOrder'
+    ]);
+
+    Route::get('/placeanorder',[
+        'uses' => 'OrderController@getPlaceOrderPage',
+        'as' => 'placeanorder'
+    ]);
+
+
+
+
+
 
 });
 

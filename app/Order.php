@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    public function items(){
+    public function cartitems(){
         
-        return $this->hasMany('App\Item');
+        return $this->hasMany(CartItem::class);
     }
 }
