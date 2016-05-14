@@ -81,6 +81,14 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>"CustomerController@getDashbord",
         'as'=> "dashbord"
     ]);
+    Route::get('/staffsignin', function () {
+        return view('staffsignin');
+    });
+    Route::post('/staffsigninaction',[
+        'uses'=>'StaffController@postSignIn',
+        'as'=>'staffsigninaction'
+    ]);
+
 
     Route::put('getTotalPrice', [
         'as' => 'getTotalPrice',

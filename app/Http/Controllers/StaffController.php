@@ -19,7 +19,7 @@ class StaffController extends Controller
         $last_name = $request['last_name'];
         $email = $request['email'];
         $phone = $request['phone'];
-        $password = bcrypt($request['password1']);
+        $password = bcrypt($request['password']);
         $adress1 = $request['adress1'];
         $adress2 = $request['adress2'];
         $adress3 = $request['adress3'];
@@ -43,5 +43,17 @@ class StaffController extends Controller
         $staff->save();
 
 
+    }
+    public function postSignIn(Request $request){
+
+        if(Auth::attempt(['email'=>$request['email'],'password'=>$request['password']])){
+            return redirect()->route('dashbord');
+        }
+        
+        else{
+            //$Error=array('error' => 'Password Doesnt match');
+            return Redirect::back()->with('Error',"Email and Password didn't match");
+
+        }
     }
 }
