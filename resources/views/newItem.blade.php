@@ -12,7 +12,7 @@
                 <h2> New Item </h2>
             </div>
             <form action="{{route('addNewItem')}}" method="post">
-                <div class="input-field col s6 '' }}">
+                <div class="input-field col s6 ">
                     <label for="itemID">Item ID NO.</label>
                     <input class="form-control " type="text" name="itemID" id="itemID">
                 </div>

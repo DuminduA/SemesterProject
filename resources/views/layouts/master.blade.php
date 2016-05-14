@@ -15,10 +15,10 @@
     <style>
         nav {background-color: #1a38ff}
     </style>
-
 </head>
 
 <body>
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 
 <!-- Compiled and minified JavaScript -->

@@ -3,8 +3,33 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Item;
+use Mockery\Exception;
 
 class ItemController extends Controller{
+
+    public function search( Request $request){
+        $this->validate($request,[
+            'search' => 'required',
+        ]);
+        $string = $request['search'];
+        $item = Item::where('name',$string)->first();
+        if (!isset($item)){
+            $items=array();
+            $heading = '"Item Not Found"';
+            return view('searchItem', ['items' => $items,'heading'=>$heading]);
+        }
+        $items = array();
+        $items[] = $item;
+        $heading = 'Available Items';
+        return view('searchItem', ['items' => $items,'heading'=>$heading]);
+    }
+  
+    public function getsearchItem(){
+        $items = Item::all();
+        $heading = 'Available Items';
+        return view('searchItem',['items'=>$items,'heading'=>$heading]);
+    }
+
 
     public function getUpdateItems(){
         $items = Item::all();

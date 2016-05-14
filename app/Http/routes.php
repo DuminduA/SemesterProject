@@ -13,9 +13,17 @@
 
 Route::group(['middleware'=>['web']],function(){
 
-    Route::get('/', function () {
-        return view('searchItem');
-    });
+
+    Route::post('/search',[
+        'uses' => 'ItemController@search',
+        'as' => 'search'
+    ]);
+    
+    Route::get('/searchItem',[
+        'uses' => 'ItemController@getsearchItem',
+        'as' => 'searchItem'
+    ]);
+
 
 //load Signup Form
     Route::get('/signup', function () {
