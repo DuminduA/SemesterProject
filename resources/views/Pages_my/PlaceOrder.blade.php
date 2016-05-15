@@ -56,10 +56,10 @@ use App\Http\Controllers\CartController;
         </div>
 
         <!--order proceed button-->
-        <button id="proceed_btn" href="{{route('placeanorder')}}" class="btn waves-effect waves-light" type="submit" name="action">Proceed the order
-            <i class="material-icons right">send</i>
-        </button>
-
+        {{--<a id="proceed_btn" href="{{route('placeanorder')}}" class="btn waves-effect waves-light" type="submit" name="action">Proceed the order--}}
+            {{--<i class="material-icons right">send</i>--}}
+        {{--</a>--}}
+`   </div>
 
 
  @endsection

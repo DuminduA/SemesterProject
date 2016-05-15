@@ -34,13 +34,22 @@
                                 <p>Category: {{$item->category}}</p>
                                 SLK.{{$item->sellPrice}}
                                 <div class="row">
-                                    <a class="waves-effect waves-light btn" href="#">Add to cart</a>
+                                    <form action="{{ route('addToCart',['item'=>$item])}}" method="post">
+                                        <div class="input-field col s6 ">
+                                            <label for="quantity">Quantity</label>
+                                            <input class="form-control " type="number" min="1" name="quantity" id="quantity" required>
+                                            <button type="submit" class="input-group-addon">Add To Cart</button>
+                                        </div>
+                                        <input type="hidden" name="_token" value="{{ Session::token()}}">
+                                    </form>
                                 </div>
                             </div>
                         @endforeach
                     </div>
                 </form>
             </div>
+            <a id="proceed_btn" href="{{route('PlaceOrder')}}" class="btn waves-effect waves-light" name="action">Proceed </a>
         </div>
+        {{--{{Auth::user()->first_name}}--}}
     </section>
 @endsection

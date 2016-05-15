@@ -15,12 +15,9 @@ class CustomerController extends Controller
     public function getDashbord()
     {
         return view('dashbord');
-
     }
 
     public function postSignUp(Request $request){
-
-
         $this->validate($request,[
             'email'=> 'required|email|unique:customers',
             'first_name'=>'required',
@@ -28,29 +25,22 @@ class CustomerController extends Controller
 
         ]);
 
-        $first_name = $request['first_name'];
-        $last_name = $request['last_name'];
-        $email = $request['email'];
-        echo $email;
-        $phone = $request['phone'];
-        $password = bcrypt($request['password1']);
-//        $first_name = $request['first_name'];
-//        $first_name = $request['first_name'];
         $customer = new Customer();
-        $customer->first_name=$first_name;
-        $customer->last_name =$last_name;
-        $customer->email=$email;
-        $customer->phone=$phone;
-        $customer->password=$password;
+        $customer->first_name=$request['first_name'];
+        $customer->last_name =$request['last_name'];
+        $customer->email=$request['email'];
+        $customer->phone=$request['phone'];
+        $customer->password=bcrypt($request['password1']);
 
         $customer->save();
-        return redirect()-> back();
+        Auth::login($customer);
+        return redirect()-> route('searchItem');
 
     }
     public function postSignIn(Request $request){
 
         if(Auth::attempt(['email'=>$request['email'],'password'=>$request['password']])){
-            return redirect()->route('dashbord');
+            return redirect()->route('searchItem');
         }
         else{
             //$Error=array('error' => 'Password Doesnt match');
@@ -62,7 +52,7 @@ class CustomerController extends Controller
     public function signOut(){
         
         Auth::logout();
-       return view('/dashbord');
+       return view('/signinform');
     }
 
 }
