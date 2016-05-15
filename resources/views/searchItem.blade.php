@@ -63,5 +63,6 @@
             </div>
             <a id="proceed_btn" href="{{route('PlaceOrder')}}" class="btn waves-effect waves-light" name="action">Proceed </a>
         </div>
+        {{--{{Auth::user()->first_name}}--}}
     </section>
 @endsection

@@ -49,5 +49,10 @@ class CustomerController extends Controller
         }
 
     }
+    public function signOut(){
+        
+        Auth::logout();
+       return view('/signinform');
+    }
 
 }

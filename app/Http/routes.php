@@ -13,16 +13,16 @@
 
 Route::group(['middleware'=>['web']],function(){
 
-    
-    Route::post('/search',[
+
+    Route::post('/search',[                              //Search Results
         'uses' => 'ItemController@search',
         'as' => 'search'
     ]);
     
-    Route::get('/searchItem',[
+    Route::get('/searchItem',[                          //Search Page--Also call Search function
+
         'uses' => 'ItemController@getsearchItem',
         'as' => 'searchItem',
-
     ]);
 
     Route::post('/addToCart/{item}',[
@@ -30,8 +30,21 @@ Route::group(['middleware'=>['web']],function(){
         'as' => 'addToCart',
         'middleware'=>'auth'
     ]);
+    
+    Route::get('/deletefromCart/{btn_id}',[             //delete an item from the cart
+        'uses' => 'CartController@removeFromCart',
+        'as' => 'deletefromCart'
+    ]);
+    Route::get('/placeanorder',[                        //place an order
+        'uses' => 'OrderController@PlaceAnOrder',
+        'as' => 'PlaceAnOrder'
+    ]);
 
-    //load Signup Form
+    Route::get('/signup', function () {                     //open signup form
+        return view('signup');
+    });
+
+
     Route::get('/signup', function () {
         return view('signup');
     });
@@ -46,21 +59,29 @@ Route::group(['middleware'=>['web']],function(){
     Route::post('/signup',[
         'uses'=>'CustomerController@postSignUp',
         'as'=> 'signup'
-      ]);
+    ]);
 
-    Route::get('/', function () {
+    Route::get('/signinform', function () {                 //get the Sign in Form
         return view('signinform');
+
     })->name('home');
-    
-    Route::post('/signin',[
+    Route::post('/signin',[                                 //Sign In Request From Customer
         'uses'=>'CustomerController@postSignin',
         'as'=> 'signin'
     ]);
-    
-    Route::get('/dashbord',[
+    Route::get('/dashbord',[                                //Go To The DashBord
         'uses'=>"CustomerController@getDashbord",
         'as'=> "dashbord"
     ]);
+
+    Route::get('/signout',[
+        'uses'=>'CustomerController@signOut',
+        'as'=> 'signout'
+    ]);
+
+    Route::get('password/reset/{token}?',"Auth\PasswordController@showResetForm");                      //Reset Passwords
+    Route::post('password/email','Auth\PasswordController@sendResetLinkEmail');
+    Route::post('password/reset','Auth\PasswordController@Reset');
 
     Route::put('getTotalPrice', [
         'as' => 'getTotalPrice',
@@ -71,8 +92,7 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>"OrderController@placeOrder",
         'as'=> 'PlaceOrder'
     ]);
-
-
+    
 });
 
 

@@ -31,6 +31,9 @@
             {{--<div class="alert-success"></div>--}}
         </form>
     </div>
+    <div class="row">
+        <a href="{{url('signup')}}" class="bg-warning"></a>
+    </div>
 
     <div class="alert-danger">
         {{Session::get('Error')}}
