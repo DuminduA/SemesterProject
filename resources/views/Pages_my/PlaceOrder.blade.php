@@ -14,9 +14,10 @@ use App\Http\Controllers\CartController;
         right: 20px;
         top:90px;
     }
-    #remove button{
+    #remove_button{
         position: absolute;
-        right:50px;
+        left:600px;
+
     }
 
 </style>
@@ -49,7 +50,7 @@ use App\Http\Controllers\CartController;
             Quantity : {{$item->qunatity}}  </br>
                 Price of Items : {{$item->qunatity*$item->price}}
 
-                <a href="{{route('deletefromCart',['btn_id' =>$item->id])}}" class="waves-effect waves-light btn">Remove</a>
+                <a id='remove_button' href="{{route('deletefromCart',['btn_id' =>$item->id])}}" class="waves-effect waves-light btn">Remove</a>
             </a>
             @endforeach
 

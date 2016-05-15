@@ -22,12 +22,13 @@ Route::group(['middleware'=>['web']],function(){
     Route::get('/searchItem',[
         'uses' => 'ItemController@getsearchItem',
         'as' => 'searchItem',
-        'middleware'=>'auth'
+
     ]);
 
     Route::post('/addToCart/{item}',[
         'uses' => 'CartController@addToCart',
-        'as' => 'addToCart'
+        'as' => 'addToCart',
+        'middleware'=>'auth'
     ]);
 
     //load Signup Form
@@ -47,7 +48,7 @@ Route::group(['middleware'=>['web']],function(){
         'as'=> 'signup'
       ]);
 
-    Route::get('/signinform', function () {
+    Route::get('/', function () {
         return view('signinform');
     })->name('home');
     
@@ -59,15 +60,6 @@ Route::group(['middleware'=>['web']],function(){
     Route::get('/dashbord',[
         'uses'=>"CustomerController@getDashbord",
         'as'=> "dashbord"
-    ]);
-    
-    Route::get('/staffsignin', function () {
-        return view('staffsignin');
-    });
-    
-    Route::post('/staffsigninaction',[
-        'uses'=>'StaffController@postSignIn',
-        'as'=>'staffsigninaction'
     ]);
 
     Route::put('getTotalPrice', [

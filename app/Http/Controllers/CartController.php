@@ -10,8 +10,8 @@ use App\Http\Requests;
 
 class CartController extends Controller
 {
-    
-    public function addToCart(Item $item,Request $request){
+
+    public function addToCart( Item $item,Request $request){
         $cart = new Cart();
         $customer = Auth::user();
         $cart->name = $item->name;
