@@ -15,7 +15,14 @@
             <li><a href="#">Contact Us</a></li>
             <li><a href="#">Return Item</a></li>
             <li><a href="#">About Us</a></li>
-            <li><a href="#">Sign In</a></li>
+            @if(Auth::check())
+            <li><a href="{{route('signout')}}">Sign Out</a></li>
+                @else
+                    <li><a href="{{url('signinform')}}">Sign In</a></li>
+
+                @endif
+
+
 
 
 
