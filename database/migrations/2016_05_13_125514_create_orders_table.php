@@ -3,15 +3,16 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrderTable extends Migration
+class CreateOrdersTable extends Migration
 {
   
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->increments('order_id')->unsigned();
+            $table->increments('id')->unsigned();
             $table->integer('customer_id')->unsigned();
-            $table->float('orderPrice')->unsigned();
+            $table->float('totalPrice')->unsigned();
+            $table->integer('tolalQuantity');
             $table->boolean('status');//proceeded or not
             $table->timestamps();
         });

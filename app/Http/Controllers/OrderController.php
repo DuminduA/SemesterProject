@@ -7,18 +7,19 @@ use App\Order;
 use App\Cart;
 use App\CartItem;
 use Illuminate\Http\Request;
-
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
 
 class OrderController extends Controller
 {
     public function PlaceAnOrder(Request $request){
         $sucess2=false;
-        $sucess1=false;
-        $cartitems=Cart::where('id',Auth::customer()->id);
+        $sucess1=false;//
+        $customer = Auth::user();
+
+        $cartitems=Cart::where('customer_id',$customer->customer_id)->get();//; // take the appropriate class for the user
+
         $totalprice=0;
-        $customer_id=$request['cus'];;
 
         for($i = 0; $i<sizeof($cartitems)  ;$i++){
             $totalprice += $cartitems[$i]->price*$cartitems[$i]->qunatity;
@@ -44,20 +45,26 @@ class OrderController extends Controller
 
         if($sucess1&&$sucess2){
             $message= "Order Succefull ";
-            $ItemToRemove= Cart::where('customer_id',$customer_id)->first();
-            $ItemToRemove->delete();
+            $ItemToRemove= Cart::where('customer_id',Auth::user())->first();
+            $ItemToRemove->delete();   //after order proceed cart should be empty s
         }
         else{$message= "Order Unsuccefull. ";}
 
+
+        
         return redirect()->route('/placeanorder');
     }
-    
+
+
+
     public function getPlaceOrderPage(){
         return view('Pages_my.PlaceOrder');
     }
     
     public function UpdateAnOrder(){
-        
+
+        $Orders=Order::where("customer_id",Auth::user()->customer_id)->get();
+
         return view('Pages_my.UpdateOrder');
     }
 

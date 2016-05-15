@@ -17,28 +17,28 @@ use App\Http\Controllers\OrderController;
     <table class="striped">
         <thead>
         <tr>
-            <th data-field="id">Name</th>
-            <th data-field="name">Item Name</th>
-            <th data-field="price">Item Price</th>
+            <th data-field="Order_id">ID</th>
+            <th data-field="Total Price">Total price</th>
+            <th data-field="Total Quantity">Item Price</th>
+            <th data-field="Status">Status of Your Order</th>
+            <th data-field="Expiraion_date">Expiration date</th>
         </tr>
         </thead>
 
+        <?php $Order_id= Order::where('customer_id',Auth::user()->id)->get(); ?>
+
         <tbody>
+        @foreach($Order_id as $Order)
         <tr>
-            <td>Alvin</td>
-            <td>Eclair</td>
-            <td>$0.87</td>
+            <td>{{$Order->id}}</td>
+            <td>{{$Order->totalPrice}}</td>
+            <td>{{$Order->totalQuantiy}}</td>
+            <td>{{$Order->status}}</td>
+            <td>{{date('F d, Y', strtotime($list->created_at))}}</td>
+
+
         </tr>
-        <tr>
-            <td>Alan</td>
-            <td>Jellybean</td>
-            <td>$3.76</td>
-        </tr>
-        <tr>
-            <td>Jonathan</td>
-            <td>Lollipop</td>
-            <td>$7.00</td>
-        </tr>
+        @endforeach
         </tbody>
     </table>
 

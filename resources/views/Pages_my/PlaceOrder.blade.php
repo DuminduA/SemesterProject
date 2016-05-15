@@ -3,6 +3,7 @@
 <?php
 use App\Http\Controllers\CartController;
 use App\Cart;
+use Illuminate\Support\Facades\Auth;
 ?>
 
 
@@ -33,17 +34,23 @@ use App\Cart;
                     <div class="card-content black-text">
                         <span class="card-title"></span>
                         <p>Price  :&nbsp; &nbsp; &nbsp;{{$totalprice}}</br>
-    </p>
+
                     </div>
                     <div class="card-action">
                         item types :&nbsp; &nbsp; &nbsp;{{$totalitems}}
+
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <?php  $CartItems = Cart::all();  ?>
+    {{--price and quantity ends here. --}}
+    {{--cart items adding using a loop--}}
+    @if(Auth::check())
+    <?php  $CartItems = Cart::where('customer_id',Auth::user()->id)->get();  ?>
 
+        {{--all cart items assinged by a loop--}}
        <div class="collection">
             @foreach($CartItems as $item)
             <a href="#!" class="collection-item">Item : {{$item->name}}  </br>

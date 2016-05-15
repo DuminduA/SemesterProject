@@ -11,29 +11,56 @@
 |
 */
 
-
-
-
 Route::group(['middleware'=>['web']],function(){
+
+
+
+    Route::post('/search',[
+        'uses' => 'ItemController@search',
+        'as' => 'search'
+    ]);
+    
+    Route::get('/searchItem',[
+        'uses' => 'ItemController@getsearchItem',
+        'as' => 'searchItem'
+    ]);
+
 
 //load Signup Form
     Route::get('/signup', function () {
         return view('signup');
     });
+
     // Details in signup
     Route::post('/addNewItem',[
         'uses' => 'ItemController@addNewItem',
         'as' => 'addNewItem'
     ]);
 
-    Route::get('/test',[
-        'uses' => 'ItemController@getTest',
-        'as' => 'test'
-    ]);
-
-    Route::get('/newItem',[
+    Route::get('/newItem',[                     //to show the newItem page
         'uses' => 'ItemController@getnewItem',
         'as' => 'newItem'
+    ]);
+
+    Route::get('/updateItems',[                   //to show the Item table page
+        'uses' => 'ItemController@getUpdateItems',
+        'as' => 'updateItems'
+    ]);
+    
+
+    Route::get('/item-delete/{itemID}',[        //to delete a item
+        'uses' => 'ItemController@deleteItem',
+        'as' => 'item.delete'
+    ]);
+
+    Route::get('/item-edit/{itemID}',[          //to edit a item
+        'uses' => 'ItemController@editItem',
+        'as' => 'item.edit'
+    ]);
+
+    Route::post('/addEditItem/{item}',[            //to add the edited item to the table
+        'uses' => 'ItemController@addEditItem',
+        'as' => 'addEditItem'
     ]);
 
 
@@ -48,6 +75,26 @@ Route::group(['middleware'=>['web']],function(){
         'as'=> 'signup'
       ]);
 
+    Route::get('/signinform', function () {
+        return view('signinform');
+    });
+    Route::post('/signin',[
+        'uses'=>'CustomerController@postSignin',
+        'as'=> 'signin'
+    ]);
+    Route::get('/dashbord',[
+        'uses'=>"CustomerController@getDashbord",
+        'as'=> "dashbord"
+    ]);
+    Route::get('/staffsignin', function () {
+        return view('staffsignin');
+    });
+    Route::post('/staffsigninaction',[
+        'uses'=>'StaffController@postSignIn',
+        'as'=>'staffsigninaction'
+    ]);
+
+
     Route::put('getTotalPrice', [
         'as' => 'getTotalPrice',
         'uses' => 'OrderController@getTotalPrice'
@@ -59,12 +106,6 @@ Route::group(['middleware'=>['web']],function(){
         'as' => 'PlaceOrder',
         'uses' => 'CartController@getPlaceOrder'
     ]);
-
-    
-
-    Route::get('/', function () {
-        return view('newItem');
-    });
 
 
     Route::get('UpdateOrder', [
@@ -82,12 +123,14 @@ Route::group(['middleware'=>['web']],function(){
 
     Route::get('proceedOrder',[
         'uses' => 'OrderController@PlaceAnOrder',
-        'as' => 'proceedOrder'
+        'as' => 'proceedOrder',
+
     ]);
 
     Route::get('/placeanorder',[
         'uses' => 'OrderController@getPlaceOrderPage',
-        'as' => 'placeanorder'
+        'as' => 'placeanorder',
+         
     ]);
 
 
