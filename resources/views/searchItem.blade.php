@@ -3,29 +3,47 @@
 @section('title')
 
 @endsection
+<style>
+    #proceed_btn{
+        position: absolute;
+        right: 50px;
+
+    }
+    #request_btn{
+        position: absolute;
+        right:200px;
+
+    }
+
+</style>
 @section('contain')
     @include('includes.messageError')
     <section>
 
         <div class="nav-wrapper">
             <form action="{{ route('search')}}" method="post">
-                <div class="input-field col s6 ">
-                    <label for="serch">Search</label>
-                    <input class="form-control " type="text" name="search" id="search">
-                </div>
+                 <div class="row">
+
+                    <div class="input-field col s4 ">
+                        <label for="search">Search by</label><br>
+                        <input class="form-control " type="text" name="search" id="search" required>
+                    </div>
+                     <div class="input-field col s4">
+                         <select class="browser-default" name="searchOption" required>
+                             <option value="1">Name</option>
+                             <option value="2">Category</option>
+                         </select>
+                     </div>
+                 </div>
                 <div class="row">
                     <button type="submit" class="btn btn-primary">Search</button>
+                    <a id="proceed_btn" href="{{route('PlaceOrder')}}" class="btn waves-effect waves-light" name="action">Proceed </a>
+                    <a id="request_btn" href="{{route('request')}}" class="btn waves-effect waves-light" name="action">Request </a>
                 </div>
                 <input type="hidden" name="_token" value="{{ Session::token()}}">
             </form>
         </div>
 
-
-        <script type="text/javascript">
-            function test() {
-                console.log("Test Line");
-            }
-        </script>
 
         <div class="row">
             <div class="col-md-6 col-md-3-offset">
@@ -34,35 +52,32 @@
                 </div>
 
                 <div class="row">
-                    <form onsubmit="test()" method="post">
-                        @foreach($items as $item)
-                            <div class="col s4">
-                                <h5>{{$item->name}}</h5>
-                                <p>Category: {{$item->category}}</p>
-                                SLK.{{$item->sellPrice}}
-                                <div class="row">
-                                    <form action="{{ route('addToCart',['item'=>$item])}}" method="post">
-                                        <div class="form-group">
-                                            <label for="quantity">Quantity</label>
-                                            <input class="form-control " type="number" min="1" name="quantity"
-                                                   id="quantity" required>
+                    @foreach($items as $item)
+                        <div class="col s4">
+                            <h5>{{$item->name}}</h5>
+                            <p>Category: {{$item->category}}</p>
+                            SLK.{{$item->sellPrice}}
+                            <div class="row">
+                                <form action="{{ route('addToCart',['item'=>$item])}}" method="post">
+                                    <div class="form-group">
+                                        <label for="quantity" >Quantity</label>
+                                        <input class="form-control " type="number" min="1" name="quantity" id="quantity" required>
 
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="submit" class="form-control">Add To Cart</button>
-                                            <input type="hidden" name="_token" value="{{ Session::token()}}">
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="form-control">Add To Cart</button>
+                                        <input type="hidden" name="_token" value="{{ Session::token()}}">
 
-                                        </div>
-                                    </form>
-                                </div>
+                                    </div>
+                                </form>
                             </div>
-                        @endforeach
-                    </form>
+                        </div>
+                    @endforeach
+
                 </div>
 
             </div>
-            <a id="proceed_btn" href="{{route('PlaceOrder')}}" class="btn waves-effect waves-light" name="action">Proceed </a>
+
         </div>
-        {{--{{Auth::user()->first_name}}--}}
     </section>
 @endsection

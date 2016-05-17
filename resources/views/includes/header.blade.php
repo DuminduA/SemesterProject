@@ -18,7 +18,7 @@
             @if(Auth::check())
             <li><a href="{{route('signout')}}">Sign Out</a></li>
                 @else
-                    <li><a href="{{url('signinform')}}">Sign In</a></li>
+                    <li><a href="{{url('signup')}}">Sign up</a></li>
 
                 @endif
 

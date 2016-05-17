@@ -44,11 +44,7 @@ Route::group(['middleware'=>['web']],function(){
         return view('signup');
     });
 
-
-    Route::get('/signup', function () {
-        return view('signup');
-    });
-
+    
     //delete an item from the cart
     Route::get('/deletefromCart/{btn_id}',[
         'uses' => 'CartController@removeFromCart',
@@ -61,7 +57,7 @@ Route::group(['middleware'=>['web']],function(){
         'as'=> 'signup'
     ]);
 
-    Route::get('/signinform', function () {                 //get the Sign in Form
+    Route::get('/', function () {                 //get the Sign in Form
         return view('signinform');
 
     })->name('home');
@@ -78,10 +74,10 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'CustomerController@signOut',
         'as'=> 'signout'
     ]);
-
-    Route::get('password/reset/{token}?',"Auth\PasswordController@showResetForm");                      //Reset Passwords
-    Route::post('password/email','Auth\PasswordController@sendResetLinkEmail');
-    Route::post('password/reset','Auth\PasswordController@Reset');
+//
+//    Route::get('password/reset/{token}?',"Auth\PasswordController@showResetForm");                      //Reset Passwords
+//    Route::post('password/email','Auth\PasswordController@sendResetLinkEmail');
+//    Route::post('password/reset','Auth\PasswordController@Reset');
 
     Route::put('getTotalPrice', [
         'as' => 'getTotalPrice',
@@ -92,7 +88,19 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>"OrderController@placeOrder",
         'as'=> 'PlaceOrder'
     ]);
+
+    Route::post('/placeRequest',[
+        'uses'=>'CustomerRequestController@placeRequest',
+        'as'=>'placeRequest',
+        'middleware' => 'auth'
+    ]);
     
+    Route::get('/request',[
+       'uses'=>'CustomerRequestController@request',
+        'as' => 'request',
+        'middleware' => 'auth'
+    ]);
+           
 });
 
 

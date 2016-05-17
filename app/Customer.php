@@ -26,5 +26,9 @@ class Customer extends Model implements Authenticatable
     {
         return $this->hasOne(Cart::class);
     }
+    
+    public function customerrequests(){
+        return $this->hasMany('App\CustomerRequest');
+    }
 }
  
