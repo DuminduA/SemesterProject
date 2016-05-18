@@ -44,11 +44,7 @@ Route::group(['middleware'=>['web']],function(){
         return view('signup');
     });
 
-
-    Route::get('/signup', function () {
-        return view('signup');
-    });
-
+    
     //delete an item from the cart
     Route::get('/deletefromCart/{btn_id}',[
         'uses' => 'CartController@removeFromCart',
@@ -61,7 +57,7 @@ Route::group(['middleware'=>['web']],function(){
         'as'=> 'signup'
     ]);
 
-    Route::get('/signinform', function () {                 //get the Sign in Form
+    Route::get('/', function () {                 //get the Sign in Form
         return view('signinform');
 
     })->name('home');
@@ -92,7 +88,44 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>"OrderController@placeOrder",
         'as'=> 'PlaceOrder'
     ]);
+
+    Route::post('/placeRequest',[
+        'uses'=>'CustomerRequestController@placeRequest',
+        'as'=>'placeRequest',
+        'middleware' => 'auth'
+    ]);
     
+    Route::get('/request',[
+       'uses'=>'CustomerRequestController@request',
+        'as' => 'request',
+        'middleware' => 'auth'
+    ]);
+
+    Route::get('/profile',[
+       'uses'=>'MyProfileController@getProfile',
+        'as'=>'profile'
+    ]);
+    
+    Route::post('/nameEdit',[
+        'uses'=>'MyProfileController@nameEdit',
+        'as'=>'nameEdit'
+    ]);
+
+    Route::post('/mailEdit',[
+        'uses'=>'MyProfileController@mailEdit',
+        'as'=>'mailEdit'
+    ]);
+
+    Route::post('/phoneEdit',[
+        'uses'=>'MyProfileController@phoneEdit',
+        'as'=>'phoneEdit'
+    ]);
+
+    Route::post('/adressEdit',[
+        'uses'=>'MyProfileController@adressEdit',
+        'as'=>'adressEdit'
+    ]);
+           
 });
 
 
