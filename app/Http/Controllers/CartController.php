@@ -1,32 +1,30 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Staff;
 use App\Cart;
 use App\Item;
 use Illuminate\Http\Request;
-
+use Auth;
 use App\Http\Requests;
 
 class CartController extends Controller
 {
-        public function getPlaceOrder(){
-             $TotalPrice=0;
-             $TotalItems=0;
-            $CartItems= Cart::all();
-            
-            for($i = 0; $i<sizeof($CartItems)  ;$i++){
-                $TotalPrice += $CartItems[$i]->price*$CartItems[$i]->qunatity;
-                $TotalItems += 1;
-            }
-            
 
-             return view('Pages_my.PlaceOrder')
-               ->with(['totalprice'=> $TotalPrice])
-                ->with(['totalitems'=>$TotalItems])
-                ->with(['CartItems'=>$CartItems]);
-        }
-    
+    public function addToCart( Item $item,Request $request){
+        $cart = new Cart();
+        $customer = Auth::user();
+        $cart->name = $item->name;
+        $cart->Price = $item->sellPrice;
+        $cart->qunatity = $request['quantity'];
+        $cart->itemID = $item->itemID;
+        $customer->cart()->save($cart);
+        $newQuantity = $item->quantity - $request['quantity'];
+        Item::where('id',$item->id)->update(['quantity'=>$newQuantity]);
+        return redirect()->route('searchItem');
+
+    }
+
     public function removeFromCart($btn_id){
         
         $ItemToRemove= Cart::where('id',$btn_id)->first();

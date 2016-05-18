@@ -15,7 +15,6 @@ Route::group(['middleware'=>['web']],function(){
 
 
     Route::post('/search',[                              //Search Results
-
         'uses' => 'ItemController@search',
         'as' => 'search'
     ]);
@@ -23,71 +22,45 @@ Route::group(['middleware'=>['web']],function(){
     Route::get('/searchItem',[                          //Search Page--Also call Search function
 
         'uses' => 'ItemController@getsearchItem',
-        'as' => 'searchItem'
+        'as' => 'searchItem',
     ]);
 
-
-                                       
-//    Route::get('/signup', function () {                 //load Signup Form
-//        return view('signup');
-//    });
-
-    // Details in signup
-    Route::post('/addNewItem',[
-        'uses' => 'ItemController@addNewItem',
-        'as' => 'addNewItem'
+    Route::post('/addToCart/{item}',[
+        'uses' => 'CartController@addToCart',
+        'as' => 'addToCart',
+        'middleware'=>'auth'
     ]);
-
-    Route::get('/newItem',[                             //to show the newItem page
-        'uses' => 'ItemController@getnewItem',
-        'as' => 'newItem'
-    ]);
-
-    Route::get('/updateItems',[                         //to show the Item table page
-        'uses' => 'ItemController@getUpdateItems',
-        'as' => 'updateItems'
-    ]);
-    
-
-    Route::get('/item-delete/{itemID}',[                //to delete a item
-        'uses' => 'ItemController@deleteItem',
-        'as' => 'item.delete'
-    ]);
-
-    Route::get('/item-edit/{itemID}',[                  //to edit a item
-        'uses' => 'ItemController@editItem',
-        'as' => 'item.edit'
-    ]);
-
-    Route::post('/addEditItem/{item}',[                 //to add the edited item to the table
-        'uses' => 'ItemController@addEditItem',
-        'as' => 'addEditItem'
-    ]);
-
     
     Route::get('/deletefromCart/{btn_id}',[             //delete an item from the cart
         'uses' => 'CartController@removeFromCart',
         'as' => 'deletefromCart'
     ]);
     Route::get('/placeanorder',[                        //place an order
-
         'uses' => 'OrderController@PlaceAnOrder',
         'as' => 'PlaceAnOrder'
     ]);
 
     Route::get('/signup', function () {                     //open signup form
-
         return view('signup');
     });
-    Route::post('/signup',[                                 //signup form filled Customer Signed Up
 
+    
+    //delete an item from the cart
+    Route::get('/deletefromCart/{btn_id}',[
+        'uses' => 'CartController@removeFromCart',
+        'as' => 'deletefromCart'
+    ]);
+
+    //signup form filled
+    Route::post('/signup',[
         'uses'=>'CustomerController@postSignUp',
         'as'=> 'signup'
-      ]);
+    ]);
 
-    Route::get('/signinform', function () {                 //get the Sign in Form
+    Route::get('/', function () {                 //get the Sign in Form
         return view('signinform');
-    });
+
+    })->name('home');
     Route::post('/signin',[                                 //Sign In Request From Customer
         'uses'=>'CustomerController@postSignin',
         'as'=> 'signin'
@@ -101,22 +74,33 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'CustomerController@signOut',
         'as'=> 'signout'
     ]);
+//
+//    Route::get('password/reset/{token}?',"Auth\PasswordController@showResetForm");                      //Reset Passwords
+//    Route::post('password/email','Auth\PasswordController@sendResetLinkEmail');
+//    Route::post('password/reset','Auth\PasswordController@Reset');
 
-    Route::get('password/reset/{token}?',"Auth\PasswordController@showResetForm");                      //Reset Passwords
-    Route::post('password/email','Auth\PasswordController@sendResetLinkEmail');
-    Route::post('password/reset','Auth\PasswordController@Reset');
-
-    Route::put('getTotalPrice', [                       
+    Route::put('getTotalPrice', [
         'as' => 'getTotalPrice',
         'uses' => 'OrderController@getTotalPrice'
     ]);
 
-    Route::get('PlaceOrder', [
-        'as' => 'PlaceOrder',
-        'uses' => 'CartController@getPlaceOrder'
+    Route::get('/placeOrder',[
+        'uses'=>"OrderController@placeOrder",
+        'as'=> 'PlaceOrder'
     ]);
 
-
+    Route::post('/placeRequest',[
+        'uses'=>'CustomerRequestController@placeRequest',
+        'as'=>'placeRequest',
+        'middleware' => 'auth'
+    ]);
+    
+    Route::get('/request',[
+       'uses'=>'CustomerRequestController@request',
+        'as' => 'request',
+        'middleware' => 'auth'
+    ]);
+           
 });
 
 

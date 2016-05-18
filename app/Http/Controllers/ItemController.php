@@ -10,20 +10,31 @@ class ItemController extends Controller{
     public function search( Request $request){
         $this->validate($request,[
             'search' => 'required',
+            'searchOption' => 'required'
         ]);
         $string = $request['search'];
-        $item = Item::where('name',$string)->first();
-        if (!isset($item)){
+        $option = $request['searchOption'];
+        $check = Item::all();
+        if (sizeof($check)==0){
+            $items=array();
+            $heading = '"No Item in the in Inventory"';
+            return view('searchItem', ['items' => $items,'heading'=>$heading]);
+        }
+        if($option==1) {
+            $items = Item::where('name', $string)->get();
+        }else{
+            $items = Item::where('category', $string)->get();
+        }
+        if (!isset($items)){
             $items=array();
             $heading = '"Item Not Found"';
             return view('searchItem', ['items' => $items,'heading'=>$heading]);
         }
-        $items = array();
-        $items[] = $item;
+
         $heading = 'Available Items';
         return view('searchItem', ['items' => $items,'heading'=>$heading]);
     }
-  
+
     public function getsearchItem(){
         $items = Item::all();
         $heading = 'Available Items';
@@ -49,23 +60,17 @@ class ItemController extends Controller{
             'category' => 'required|max:20',
             'buyPrice' => 'required',
             'sellPrice' => 'required',
-            'count' => 'required'
+            'quantity' => 'required'
         ]);
 
-        $itemID = $request['itemID'];
-        $name = $request['name'];
-        $category = $request['category'];
-        $buyPrice = $request['buyPrice'];
-        $sellPrice = $request['sellPrice'];
-        $count = $request['count'];
-
         $item = new Item();
-        $item->itemID = $itemID;
-        $item->name = $name;
-        $item->category = $category;
-        $item->buyPrice = $buyPrice;
-        $item->sellPrice = $sellPrice;
-        $item->count = $count;
+        $item->itemID = $request['itemID'];
+        $item->name = $request['name'];
+        $item->category = $request['category'];
+        $item->buyPrice = $request['buyPrice'];
+        $item->sellPrice = $request['sellPrice'];
+        $item->quantity = $request['quantity'];
+        $request->staff()->item()->save($item);
         $massage = 'There was an error';
         if ($item->save()){
             $massage = 'Item added successfully';
@@ -93,23 +98,17 @@ class ItemController extends Controller{
             'category' => 'required|max:20',
             'buyPrice' => 'required',
             'sellPrice' => 'required',
-            'count' => 'required'
+            'quantity' => 'required'
         ]);
 
-        $itemID = $request['itemID'];
-        $name = $request['name'];
-        $category = $request['category'];
-        $buyPrice = $request['buyPrice'];
-        $sellPrice = $request['sellPrice'];
-        $count = $request['count'];
-
         $item = new Item();
-        $item->itemID = $itemID;
-        $item->name = $name;
-        $item->category = $category;
-        $item->buyPrice = $buyPrice;
-        $item->sellPrice = $sellPrice;
-        $item->count = $count;
+        $item->itemID = $request['itemID'];
+        $item->name = $request['name'];
+        $item->category = $request['category'];
+        $item->buyPrice = $request['buyPrice'];
+        $item->sellPrice = $request['sellPrice'];
+        $item->count = $request['quantity'];
+        $item->staff()->item();
         $item->save();
         
         return redirect()->route('updateItems');
