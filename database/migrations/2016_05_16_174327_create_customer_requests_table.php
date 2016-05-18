@@ -21,6 +21,7 @@ class CreateCustomerRequestsTable extends Migration
             $table->integer('quantity');
             $table->date('due');
             $table->integer('status');
+
         });
     }
 

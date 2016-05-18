@@ -24,8 +24,6 @@ class CustomerRequestController extends Controller{
         if ($placedate<=$currentDate){
             return view('searchItem', ['items' => $items,'heading'=>$heading])->with('Error',"Date should be greater than current date.");
         }
-        $toastContent = ('<span>I am toast content</span>');
-        Materialize.toast($toastContent, 5000);
         $place = new CustomerRequest();
         $place->name = $request['name'];
         $place->discribe = $request['discribe'];
@@ -35,6 +33,8 @@ class CustomerRequestController extends Controller{
         $customer = Auth::user();
         $place->customer_id = $customer->id;
         $place->save();
+        $heading = "Available Item";
+        $items = Item::all();
         return view('searchItem', ['items' => $items,'heading'=>$heading]);
 
     }

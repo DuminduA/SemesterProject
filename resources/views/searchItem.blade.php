@@ -63,7 +63,6 @@
                                     <div class="form-group">
                                         <label for="quantity" class="active" >Quantity</label>
                                         <input class="validate " type="number" min="1" name="quantity" id="quantity" required>
-
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" class="form-control">Add To Cart</button>

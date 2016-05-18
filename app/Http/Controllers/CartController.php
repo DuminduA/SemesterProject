@@ -27,7 +27,6 @@ class CartController extends Controller
         Item::where('id',$item->id)->update(['quantity'=>$newQuantity]);
         $message = "Item added to cart succesfully.";
         return redirect()->route('searchItem')->with(['massage'=>$message]);
-
     }
 
     public function removeFromCart($btn_id){

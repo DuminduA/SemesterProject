@@ -20,6 +20,7 @@
                             <div class="input-field col s12">
                                 <textarea id="discribe" name="discribe" type="text" class="materialize-textarea" required></textarea>
                                 <label for="discribe" class="active">Brief Discription About Item</label>
+
                             </div>
                         </div>
                     </div>
@@ -33,6 +34,7 @@
                 <div class="input-field col s6">
                     <input id="due" name="due" type="date" class="validate" required >
                     <label for="phone" class="active" data-error="date Should Be Greater than cuurent date" data-success="I Like it..">Expected Date</label><br>
+
 
                 </div>
                 <input type="hidden" name="_token" value="{{Session::token()}}">

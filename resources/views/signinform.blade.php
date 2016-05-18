@@ -24,6 +24,7 @@
                     {{--<i class="material-icons">mode_edit</i>--}}
                     <input id="password" type="password" class="validate" name="password">
                     <label for="password" class="validate">Confirm Password</label>
+
                 </div>
             </div>
             <input type="hidden" name="_token" value="{{Session::token()}}">

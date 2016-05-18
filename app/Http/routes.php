@@ -44,13 +44,6 @@ Route::group(['middleware'=>['web']],function(){
         return view('signup');
     });
 
-    
-    //delete an item from the cart
-    Route::get('/deletefromCart/{btn_id}',[
-        'uses' => 'CartController@removeFromCart',
-        'as' => 'deletefromCart'
-    ]);
-
     //signup form filled
     Route::post('/signup',[
         'uses'=>'CustomerController@postSignUp',
@@ -59,12 +52,13 @@ Route::group(['middleware'=>['web']],function(){
 
     Route::get('/', function () {                 //get the Sign in Form
         return view('signinform');
-
     })->name('home');
+    
     Route::post('/signin',[                                 //Sign In Request From Customer
         'uses'=>'CustomerController@postSignin',
         'as'=> 'signin'
     ]);
+    
     Route::get('/dashbord',[                                //Go To The DashBord
         'uses'=>"CustomerController@getDashbord",
         'as'=> "dashbord"
@@ -74,10 +68,10 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'CustomerController@signOut',
         'as'=> 'signout'
     ]);
-
-    Route::get('password/reset/{token}?',"Auth\PasswordController@showResetForm");                      //Reset Passwords
-    Route::post('password/email','Auth\PasswordController@sendResetLinkEmail');
-    Route::post('password/reset','Auth\PasswordController@Reset');
+//
+//    Route::get('password/reset/{token}?',"Auth\PasswordController@showResetForm");                      //Reset Passwords
+//    Route::post('password/email','Auth\PasswordController@sendResetLinkEmail');
+//    Route::post('password/reset','Auth\PasswordController@Reset');
 
     Route::put('getTotalPrice', [
         'as' => 'getTotalPrice',
@@ -124,8 +118,8 @@ Route::group(['middleware'=>['web']],function(){
     Route::post('/adressEdit',[
         'uses'=>'MyProfileController@adressEdit',
         'as'=>'adressEdit'
-    ]);
-           
+        
+    ]);       
 });
 
 

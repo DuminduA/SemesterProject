@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ URL::asset('src/css/materialize.min.css') }}">
     {{--<link rel="stylesheet" href="{{ URL::to('src/css/materialize.min.css') }}">--}}
 
+
     <!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -17,6 +18,7 @@
 </head>
 
 <body>
+
 @include('includes.header')
 {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>--}}
 <script type="text/javascript" src="{{ URL::asset('/src/js/jquery.min.js') }}"></script>
