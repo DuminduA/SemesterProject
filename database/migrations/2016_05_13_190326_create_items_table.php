@@ -19,8 +19,9 @@ class CreateItemsTable extends Migration
             $table->string('category');
             $table->float('buyPrice');
             $table->float('sellPrice');
+            $table->integer('staff_id')->unsigned();
             $table->integer('quantity');
-            $table->integer('staff_id');
+
             // $table->rememberToken();
             $table->timestamps();
         });

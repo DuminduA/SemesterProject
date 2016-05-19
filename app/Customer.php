@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 
-class Customer extends Model implements Authenticatable
+class 
+Customer extends Model implements Authenticatable
 {
     use \Illuminate\Auth\Authenticatable;
     /**

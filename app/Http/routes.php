@@ -40,21 +40,21 @@ Route::group(['middleware'=>['web']],function(){
         'as' => 'PlaceAnOrder'
     ]);
 
-    Route::get('/signup', function () {                     //open signup form
+    Route::get('/signup', function () {                   //open signup form
         return view('signup');
     });
 
-    //signup form filled
-    Route::post('/signup',[
+
+    Route::post('/signup',[                               //signup form filled Customer Signed Up
         'uses'=>'CustomerController@postSignUp',
         'as'=> 'signup'
     ]);
 
-    Route::get('/', function () {                 //get the Sign in Form
+    Route::get('/', function () {                          //get the Sign in Form
         return view('signinform');
     })->name('home');
     
-    Route::post('/signin',[                                 //Sign In Request From Customer
+    Route::post('/signin',[                                //Sign In Request From Customer
         'uses'=>'CustomerController@postSignin',
         'as'=> 'signin'
     ]);
@@ -68,19 +68,27 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'CustomerController@signOut',
         'as'=> 'signout'
     ]);
-//
-//    Route::get('password/reset/{token}?',"Auth\PasswordController@showResetForm");                      //Reset Passwords
-//    Route::post('password/email','Auth\PasswordController@sendResetLinkEmail');
-//    Route::post('password/reset','Auth\PasswordController@Reset');
 
     Route::put('getTotalPrice', [
         'as' => 'getTotalPrice',
         'uses' => 'OrderController@getTotalPrice'
     ]);
 
-    Route::get('/placeOrder',[
-        'uses'=>"OrderController@placeOrder",
-        'as'=> 'PlaceOrder'
+    Route::get('proceedOrder',[
+        'uses' => 'OrderController@PlaceAnOrder',
+        'as' => 'proceedOrder',
+
+    ]);
+
+    Route::get('/placeanorder',[
+        'uses' => 'OrderController@getPlaceOrderPage',
+        'as' => 'placeanorder',
+
+    ]);
+
+    Route::get('/UpdateOrder', [
+        'as' => 'UpdateOrder',
+        'uses' => 'OrderController@UpdateAnOrder'
     ]);
 
     Route::post('/placeRequest',[
@@ -94,6 +102,57 @@ Route::group(['middleware'=>['web']],function(){
         'as' => 'request',
         'middleware' => 'auth'
     ]);
+
+
+    Route::get('/PlaceOrder', [
+        'as' => 'PlaceOrder',
+        'uses' => 'CartController@getPlaceOrder']
+    );
+
+    /*/////////////////////////////////////////////////////////////////////////////////////////////////*/
+    //Update The Order Button
+    Route::get('/Updatebutton/{btn_id}', [
+            'as' => 'Updatebutton',
+            'uses' => 'OrderController@editOrder']
+    );
+
+    //Cancel the order button
+    Route::get('/Cancelbutton/{btn_id}', [
+            'as' => 'Cancelbutton',
+            'uses' => 'OrderController@getcancellationConfirm']
+    );
+
+    //ThankU Page buttons///////////////////////////////////////////////////////
+    Route::get('back', [
+            'as' => 'back',
+            'uses' => 'OrderController@getSearchItem']
+    );
+
+    Route::get('OK', [
+            'as' => 'OK',
+            'uses' => 'OrderController@CancelAnOrder']
+    );
+    /////////////////////////////////////////////////////////////////////////////
+
+        /// confirm the password to cancel the order
+    Route::post('confirmpassword', [
+            'as' => 'confirmpassword',
+            'uses' => 'OrderController@CancelAnOrder']
+    );
+
+//////////////////////to Update Order change quantity
+
+    Route::post('ChangeQuantity', [
+            'as' => 'ChangeQuantity',
+            'uses' => 'OrderController@UpdateAnOrder']
+    );
+
+    Route::post('removeToUpdateorder', [
+            'as' => 'removeToUpdateorder',
+            'uses' => 'OrderController@removeOrderItem']
+    );
+
+
 
     Route::get('/profile',[
        'uses'=>'MyProfileController@getProfile',
@@ -119,7 +178,16 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'MyProfileController@adressEdit',
         'as'=>'adressEdit'
         
-    ]);       
+    ]);
 });
+
+ 
+ 
+
+
+
+
+
+
 
 

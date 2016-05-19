@@ -2,6 +2,8 @@
 
 <?php
 use App\Http\Controllers\CartController;
+use App\Cart;
+use Illuminate\Support\Facades\Auth;
 ?>
 
 
@@ -14,10 +16,11 @@ use App\Http\Controllers\CartController;
         right: 20px;
         top:90px;
     }
+
+
     #remove_button{
         position: absolute;
         left:600px;
-
     }
 
 </style>
@@ -32,36 +35,46 @@ use App\Http\Controllers\CartController;
                 <div class="card white darken-1">
                     <div class="card-content black-text">
                         <span class="card-title"></span>
-                        <p>Price  :{{$totalprice}}</br>
-    </p>
+                        <p>Price :&nbsp; &nbsp; &nbsp;{{$totalprice}}</p>
+                        {{--{{Session::get('totalprice')}}--}}
                     </div>
                     <div class="card-action">
-                        items :{{$totalitems}}
+                      <p>item types :&nbsp; &nbsp; &nbsp;{{$totalitems}}
+                          {{--{{Session::get('totalitems')}}--}}
+
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    {{--price and quantity ends here. --}}
 
+
+    {{--cart items adding using a loop--}}
+
+    <?php $CartItems=Cart::where('customer_id',Auth::user()->id)->get() ?>
+
+        {{--all cart items assinged by a loop--}}
        <div class="collection">
-
-
             @foreach($CartItems as $item)
             <a href="#!" class="collection-item">Item : {{$item->name}}  </br>
             Quantity : {{$item->qunatity}}  </br>
                 Price of Items : {{$item->qunatity*$item->price}}
 
-                <a id='remove_button' href="{{route('deletefromCart',['btn_id' =>$item->id])}}" class="waves-effect waves-light btn">Remove</a>
+                <a href="{{route('deletefromCart',['btn_id' =>$item->id])}}"
+                   class="waves-effect waves-light btn">Remove</a>
+
             </a>
             @endforeach
-
         </div>
 
-        <!--order proceed button-->
-        {{--<a id="proceed_btn" href="{{route('placeanorder')}}" class="btn waves-effect waves-light" type="submit" name="action">Proceed the order--}}
-            {{--<i class="material-icons right">send</i>--}}
-        {{--</a>--}}
-`   </div>
 
+    <a href="{{route('proceedOrder')}}" id="proceed_btn"
+       class="waves-effect waves-light btn" type="submit"
+       name="action">Proceed The Order<i class="material-icons right">send</i></a>
 
- @endsection
+`
+
+@endsection
 
