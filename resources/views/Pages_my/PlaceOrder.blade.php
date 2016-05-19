@@ -16,8 +16,11 @@ use Illuminate\Support\Facades\Auth;
         right: 20px;
         top:90px;
     }
-    #remove button{
-        float: top;
+
+
+    #remove_button{
+        position: absolute;
+        left:600px;
     }
 
 </style>
@@ -32,11 +35,11 @@ use Illuminate\Support\Facades\Auth;
                 <div class="card white darken-1">
                     <div class="card-content black-text">
                         <span class="card-title"></span>
-                        <p>Price  :&nbsp; &nbsp; &nbsp;{{$totalprice}}</p></br>
+                        <p>Price :&nbsp; &nbsp; &nbsp;{{$totalprice}}</p>
                         {{--{{Session::get('totalprice')}}--}}
                     </div>
                     <div class="card-action">
-                      <p>  item types :&nbsp; &nbsp; &nbsp;{{$totalitems}}
+                      <p>item types :&nbsp; &nbsp; &nbsp;{{$totalitems}}
                           {{--{{Session::get('totalitems')}}--}}
 
                         </p>
@@ -61,6 +64,7 @@ use Illuminate\Support\Facades\Auth;
 
                 <a href="{{route('deletefromCart',['btn_id' =>$item->id])}}"
                    class="waves-effect waves-light btn">Remove</a>
+
             </a>
             @endforeach
         </div>

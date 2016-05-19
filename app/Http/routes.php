@@ -23,13 +23,12 @@ Route::group(['middleware'=>['web']],function(){
 
         'uses' => 'ItemController@getsearchItem',
         'as' => 'searchItem',
-        
     ]);
 
     Route::post('/addToCart/{item}',[
         'uses' => 'CartController@addToCart',
         'as' => 'addToCart',
-        'middleware'=> 'auth'
+        'middleware'=>'auth'
     ]);
     
     Route::get('/deletefromCart/{btn_id}',[             //delete an item from the cart
@@ -37,36 +36,29 @@ Route::group(['middleware'=>['web']],function(){
         'as' => 'deletefromCart'
     ]);
     Route::get('/placeanorder',[                        //place an order
-
         'uses' => 'OrderController@PlaceAnOrder',
         'as' => 'PlaceAnOrder'
     ]);
 
-    Route::get('/signup', function () {                     //open signup form
-
-        return view('signup');
-    });
-                                   //signup form filled Customer Signed Up
-
-    //load Signup Form
-    Route::get('/signup', function () {
+    Route::get('/signup', function () {                   //open signup form
         return view('signup');
     });
 
-    //signup form filled
-    Route::post('/signup',[
+
+    Route::post('/signup',[                               //signup form filled Customer Signed Up
         'uses'=>'CustomerController@postSignUp',
         'as'=> 'signup'
-      ]);
+    ]);
 
-    Route::get('/signinform', function () {                 //get the Sign in Form
+    Route::get('/', function () {                          //get the Sign in Form
         return view('signinform');
-
     })->name('home');
-    Route::post('/signin',[                                 //Sign In Request From Customer
+    
+    Route::post('/signin',[                                //Sign In Request From Customer
         'uses'=>'CustomerController@postSignin',
         'as'=> 'signin'
     ]);
+    
     Route::get('/dashbord',[                                //Go To The DashBord
         'uses'=>"CustomerController@getDashbord",
         'as'=> "dashbord"
@@ -76,10 +68,6 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'CustomerController@signOut',
         'as'=> 'signout'
     ]);
-
-    Route::get('password/reset/{token}?',"Auth\PasswordController@showResetForm");                      //Reset Passwords
-    Route::post('password/email','Auth\PasswordController@sendResetLinkEmail');
-    Route::post('password/reset','Auth\PasswordController@Reset');
 
     Route::put('getTotalPrice', [
         'as' => 'getTotalPrice',
@@ -103,6 +91,18 @@ Route::group(['middleware'=>['web']],function(){
         'uses' => 'OrderController@UpdateAnOrder'
     ]);
 
+    Route::post('/placeRequest',[
+        'uses'=>'CustomerRequestController@placeRequest',
+        'as'=>'placeRequest',
+        'middleware' => 'auth'
+    ]);
+    
+    Route::get('/request',[
+       'uses'=>'CustomerRequestController@request',
+        'as' => 'request',
+        'middleware' => 'auth'
+    ]);
+
 
     Route::get('/PlaceOrder', [
         'as' => 'PlaceOrder',
@@ -110,8 +110,7 @@ Route::group(['middleware'=>['web']],function(){
     );
 
     /*/////////////////////////////////////////////////////////////////////////////////////////////////*/
-
-    //Update The Order Button 
+    //Update The Order Button
     Route::get('/Updatebutton/{btn_id}', [
             'as' => 'Updatebutton',
             'uses' => 'OrderController@editOrder']
@@ -153,12 +152,33 @@ Route::group(['middleware'=>['web']],function(){
             'uses' => 'OrderController@removeOrderItem']
     );
 
-    Route::post('test', [
-            'as' => 'test',
-            'uses' => 'OrderController@test']
-    );
 
 
+    Route::get('/profile',[
+       'uses'=>'MyProfileController@getProfile',
+        'as'=>'profile'
+    ]);
+    
+    Route::post('/nameEdit',[
+        'uses'=>'MyProfileController@nameEdit',
+        'as'=>'nameEdit'
+    ]);
+
+    Route::post('/mailEdit',[
+        'uses'=>'MyProfileController@mailEdit',
+        'as'=>'mailEdit'
+    ]);
+
+    Route::post('/phoneEdit',[
+        'uses'=>'MyProfileController@phoneEdit',
+        'as'=>'phoneEdit'
+    ]);
+
+    Route::post('/adressEdit',[
+        'uses'=>'MyProfileController@adressEdit',
+        'as'=>'adressEdit'
+        
+    ]);
 });
 
  

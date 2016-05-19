@@ -49,8 +49,6 @@ use Illuminate\Support\Facades\Auth;
 
         </tr>
         @endforeach
-
-
         </tbody>
     </table>
 

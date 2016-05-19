@@ -19,6 +19,7 @@ class CreateCartsTable extends Migration
             $table->increments('id');
             $table->integer('ItemID');
             $table->integer('customer_id')->unsigned();
+            //$table->integer('itemID');
             $table->string('name');
             $table->float('price')->unsigned();
             $table->integer('qunatity')->unsigned();

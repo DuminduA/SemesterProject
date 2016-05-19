@@ -1,7 +1,7 @@
 
 <!-- Dropdown Structure -->
 <ul id="dropdown1" class="dropdown-content">
-    <li><a href="#!">Profile</a></li>
+    <li><a href="{{route('profile')}}">Profile</a></li>
     <li><a href="#!"> Purchase History</a></li>
     <li class="divider"></li>
     <li><a href="#!">Messeges</a></li>
@@ -18,7 +18,7 @@
             @if(Auth::check())
             <li><a href="{{route('signout')}}">Sign Out</a></li>
                 @else
-                    <li><a href="{{url('signinform')}}">Sign In</a></li>
+                    <li><a href="{{url('signup')}}">Sign up</a></li>
 
                 @endif
 

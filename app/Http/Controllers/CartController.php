@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Staff;
 use App\Cart;
 use App\Item;
 use Auth;
@@ -10,6 +10,7 @@ use App\Http\Requests;
 
 class CartController extends Controller
 {
+
         public function getPlaceOrder(){
              $TotalPrice=0;
              $TotalItems=0;
@@ -27,23 +28,32 @@ class CartController extends Controller
                 ->with(['CartItems'=>$CartItems->all()]);
     }
     
-    public function addToCart(Item $item,Request $request){
+    
+    public function addToCart( Item $item,Request $request){
+        if (($item->quantity - $request['quantity'])<=0){
+            $message = "There are no sufficient item.";
+            return redirect()->route('searchItem')->with(['message'=>$message]);
+        }
         $cart = new Cart();
         $customer = Auth::user();
         $cart->name = $item->name;
         $cart->Price = $item->sellPrice;
         $cart->qunatity = $request['quantity'];
         $cart->ItemID=$item->id;
+//        $cart->itemID = $item->itemID;
         $customer->cart()->save($cart);
-        return redirect()->route('searchItem');
+        $newQuantity = $item->quantity - $request['quantity'];
+        Item::where('id',$item->id)->update(['quantity'=>$newQuantity]);
+        $message = "Item added to cart succesfully.";
+        return redirect()->route('searchItem')->with(['massage'=>$message]);
     }
-    
-    public function removeFromCart($btn_id){
 
-        
-        
+    public function removeFromCart($btn_id){
+                
         $ItemToRemove= Cart::where('id',$btn_id)->first();
         $ItemToRemove->delete();
         return redirect()->route('PlaceOrder');
     }
+
+
 }

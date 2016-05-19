@@ -49,7 +49,7 @@ class OrderController extends Controller
             $cartitem->itemID=$cartitems[$i]->ItemID;
             $cartitem->category=$item->category;
             $cartitem->sellPrice=$item->sellPrice;
-            $cartitem->quantity=$item->count;
+            $cartitem->quantity=$item->quantity;
             $sucess2=$Order->cartitems()->save($cartitem);
         }
 
@@ -92,8 +92,11 @@ class OrderController extends Controller
 
                     $TheOrder->Cancel="Cancelled";
                     $TheOrder->save();
+                    $messege="Your Order has been Removed..";
+                    return view('Pages_my.UpdateOrder')->with(['message',$messege]);
                 }
             }
+
 
             
 
@@ -114,13 +117,12 @@ class OrderController extends Controller
 //
 //           $Orders->delete();  //delete the order
 
-            $messege="Your Order has been Removed..";
-            return view('Pages_my.UpdateOrder')->with(['messege',$messege]);
+
         }
         else{
 
             $messege=" Password Is Incorrect.";
-            Return view('Pages_my.cancellationConfirm')->with(['messege',$messege]);
+            Return view('Pages_my.cancellationConfirm',['btn_id'=>$btn_id])->with(['message',$messege]);
         }
 
     }
@@ -139,8 +141,9 @@ class OrderController extends Controller
 
     public function getSearchItem(){
         
-        
-        return view('searchItem');
+        $heading="Available Items";
+        $items= Item::all();
+        return view('searchItem',['heading'=>$heading,'items'=>$items]);
     }
 
     
@@ -164,7 +167,7 @@ class OrderController extends Controller
                 ->update(['quantity' => $Quantity]);
             return view('Pages_my.UpdateOrder');
         }else{
-            return view('Pages_my.UpdateOrder')->with(['messege',"You Have Cancelled This Order"]);
+            return view('Pages_my.UpdateOrder')->with(['message',"You Have Cancelled This Order"]);
        }
 
 
