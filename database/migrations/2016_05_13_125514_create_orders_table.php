@@ -13,8 +13,9 @@ class CreateOrdersTable extends Migration
             $table->integer('customer_id')->unsigned();
             $table->float('totalPrice')->unsigned();
             $table->integer('tolalQuantity');
+            $table->string('Cancel');
             $table->boolean('status');//proceeded or not
-            $table->timestamps();
+            $table->timestamps();   
         });
     }
 

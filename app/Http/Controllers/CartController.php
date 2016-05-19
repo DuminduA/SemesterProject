@@ -24,7 +24,7 @@ class CartController extends Controller
              return view('Pages_my.PlaceOrder')
                ->with(['totalprice'=> $TotalPrice])
                 ->with(['totalitems'=>$TotalItems])
-                ->with(['CartItems'=>$CartItems->all() ]);
+                ->with(['CartItems'=>$CartItems->all()]);
     }
     
     public function addToCart(Item $item,Request $request){
@@ -33,6 +33,7 @@ class CartController extends Controller
         $cart->name = $item->name;
         $cart->Price = $item->sellPrice;
         $cart->qunatity = $request['quantity'];
+        $cart->ItemID=$item->id;
         $customer->cart()->save($cart);
         return redirect()->route('searchItem');
     }

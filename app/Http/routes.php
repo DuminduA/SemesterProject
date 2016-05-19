@@ -98,7 +98,7 @@ Route::group(['middleware'=>['web']],function(){
 
     ]);
 
-    Route::get('UpdateOrder', [
+    Route::get('/UpdateOrder', [
         'as' => 'UpdateOrder',
         'uses' => 'OrderController@UpdateAnOrder'
     ]);
@@ -108,6 +108,56 @@ Route::group(['middleware'=>['web']],function(){
         'as' => 'PlaceOrder',
         'uses' => 'CartController@getPlaceOrder']
     );
+
+    /*/////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+    //Update The Order Button 
+    Route::get('/Updatebutton/{btn_id}', [
+            'as' => 'Updatebutton',
+            'uses' => 'OrderController@editOrder']
+    );
+
+    //Cancel the order button
+    Route::get('/Cancelbutton/{btn_id}', [
+            'as' => 'Cancelbutton',
+            'uses' => 'OrderController@getcancellationConfirm']
+    );
+
+    //ThankU Page buttons///////////////////////////////////////////////////////
+    Route::get('back', [
+            'as' => 'back',
+            'uses' => 'OrderController@getSearchItem']
+    );
+
+    Route::get('OK', [
+            'as' => 'OK',
+            'uses' => 'OrderController@CancelAnOrder']
+    );
+    /////////////////////////////////////////////////////////////////////////////
+
+        /// confirm the password to cancel the order
+    Route::post('confirmpassword', [
+            'as' => 'confirmpassword',
+            'uses' => 'OrderController@CancelAnOrder']
+    );
+
+//////////////////////to Update Order change quantity
+
+    Route::post('ChangeQuantity', [
+            'as' => 'ChangeQuantity',
+            'uses' => 'OrderController@UpdateAnOrder']
+    );
+
+    Route::post('removeToUpdateorder', [
+            'as' => 'removeToUpdateorder',
+            'uses' => 'OrderController@removeOrderItem']
+    );
+
+    Route::post('test', [
+            'as' => 'test',
+            'uses' => 'OrderController@test']
+    );
+
 
 });
 

@@ -17,8 +17,7 @@ use Illuminate\Support\Facades\Auth;
         top:90px;
     }
     #remove button{
-        position: absolute;
-        right:50px;
+        float: top;
     }
 
 </style>
@@ -34,10 +33,11 @@ use Illuminate\Support\Facades\Auth;
                     <div class="card-content black-text">
                         <span class="card-title"></span>
                         <p>Price  :&nbsp; &nbsp; &nbsp;{{$totalprice}}</p></br>
-
+                        {{--{{Session::get('totalprice')}}--}}
                     </div>
                     <div class="card-action">
                       <p>  item types :&nbsp; &nbsp; &nbsp;{{$totalitems}}
+                          {{--{{Session::get('totalitems')}}--}}
 
                         </p>
                     </div>
@@ -50,7 +50,7 @@ use Illuminate\Support\Facades\Auth;
 
     {{--cart items adding using a loop--}}
 
-    {{$CartItems=Cart::where('customer_id',Auth::user()->id)->get()}}
+    <?php $CartItems=Cart::where('customer_id',Auth::user()->id)->get() ?>
 
         {{--all cart items assinged by a loop--}}
        <div class="collection">
@@ -67,7 +67,8 @@ use Illuminate\Support\Facades\Auth;
 
 
     <a href="{{route('proceedOrder')}}" id="proceed_btn"
-       class="waves-effect waves-light btn" type="submit" name="action">Proceed The Order<i class="material-icons right">send</i></a>
+       class="waves-effect waves-light btn" type="submit"
+       name="action">Proceed The Order<i class="material-icons right">send</i></a>
 
 `
 
