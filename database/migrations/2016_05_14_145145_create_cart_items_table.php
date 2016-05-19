@@ -3,31 +3,26 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCartsTable extends Migration
+class CreateCartItemsTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    
-    //price should be a float value
     public function up()
     {
-        Schema::create('carts', function (Blueprint $table) {
-            
+        Schema::create('cart_items', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('ItemID');
-            $table->integer('customer_id')->unsigned();
-            //$table->integer('itemID');
+            $table->string('itemID');
             $table->string('name');
-            $table->float('price')->unsigned();
-            $table->integer('qunatity')->unsigned();
+            $table->string('category');
+            $table->float('sellPrice');
+            $table->integer('quantity');
+            $table->integer('order_id')->unsigned();
             $table->timestamps();
-
         });
     }
-    
 
     /**
      * Reverse the migrations.
@@ -36,6 +31,6 @@ class CreateCartsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('carts');
+        Schema::drop('cart_items');
     }
 }

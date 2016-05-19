@@ -11,4 +11,10 @@ class Item extends Model
 
         return $this->belongsTo('App\Staff');
     }
+
+    public function cartitems(){
+        
+        return $this->hasOne(CartItem::class);
+    }
+
 }
