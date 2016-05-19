@@ -3,24 +3,31 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateCartsTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
+    
+    //price should be a float value
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('carts', function (Blueprint $table) {
+            
             $table->increments('id');
+            $table->integer('ItemID');
+            $table->integer('customer_id')->unsigned();
+            //$table->integer('itemID');
             $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->rememberToken();
+            $table->float('price')->unsigned();
+            $table->integer('qunatity')->unsigned();
             $table->timestamps();
+
         });
     }
+    
 
     /**
      * Reverse the migrations.
@@ -29,6 +36,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('users');
+        Schema::drop('carts');
     }
 }
