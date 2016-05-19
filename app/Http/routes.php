@@ -10,7 +10,22 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+use App\Attendance;
+use App\attsheet;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('attendance','attendanceController@show');
+
+Route::post('admin/attendance_database','addatsheetController@index');
+
+ 
+
+    
+   
+
+
+
+
