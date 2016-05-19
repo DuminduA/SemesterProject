@@ -12,9 +12,8 @@
         <ul class="right hide-on-med-and-down">
             <li><a href="{{URL::to('searchItem')}}">Home</a></li>
             <li><a href="#">Continue Shopping</a></li>
-            <li><a href="#">Contact Us</a></li>
             <li><a href="#">Return Item</a></li>
-            <li><a href="#">About Us</a></li>
+            <li><a href="{{URL::to('aboutUs')}}">About Us</a></li>
             @if(Auth::check())
             <li><a href="{{route('signout')}}">Sign Out</a></li>
                 @else

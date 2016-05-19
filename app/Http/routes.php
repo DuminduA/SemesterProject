@@ -183,7 +183,10 @@ Route::group(['middleware'=>['web']],function(){
     ]);
 });
 
+Route::get('aboutUs',function(){
+    return view ('aboutUs');
 
+});
 
 
 
