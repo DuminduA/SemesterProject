@@ -118,8 +118,12 @@ Route::group(['middleware'=>['web']],function(){
     Route::post('/adressEdit',[
         'uses'=>'MyProfileController@adressEdit',
         'as'=>'adressEdit'
-        
-    ]);       
+    ]);
+
+    Route::get('/return',[
+        'uses'=>'ReturnItemController@getReturn',
+        'as'=> 'return'
+    ]);
 });
 
 
