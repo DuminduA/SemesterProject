@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use App\Item;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 
 class CartController extends Controller
@@ -14,7 +13,8 @@ class CartController extends Controller
         public function getPlaceOrder(){
              $TotalPrice=0;
              $TotalItems=0;
-             $CartItems= Cart::where('customer_id',Auth::user()->id)->get();
+             $userId=   Auth::user();
+             $CartItems= Cart::where('customer_id',$userId->id)->get();
             
             for($i = 0; $i<sizeof($CartItems)  ;$i++){
                 $TotalPrice += $CartItems[$i]->price*$CartItems[$i]->qunatity;
@@ -27,6 +27,16 @@ class CartController extends Controller
                 ->with(['CartItems'=>$CartItems->all() ]);
     }
     
+    public function addToCart(Item $item,Request $request){
+        $cart = new Cart();
+        $customer = Auth::user();
+        $cart->name = $item->name;
+        $cart->Price = $item->sellPrice;
+        $cart->qunatity = $request['quantity'];
+        $customer->cart()->save($cart);
+        return redirect()->route('searchItem');
+    }
+    
     public function removeFromCart($btn_id){
 
         
@@ -35,8 +45,4 @@ class CartController extends Controller
         $ItemToRemove->delete();
         return redirect()->route('PlaceOrder');
     }
-
-
 }
-
-

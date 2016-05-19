@@ -33,11 +33,11 @@ use Illuminate\Support\Facades\Auth;
                 <div class="card white darken-1">
                     <div class="card-content black-text">
                         <span class="card-title"></span>
-                        <p>Price  :&nbsp; &nbsp; &nbsp;{{$totalprice}}</br>
+                        <p>Price  :&nbsp; &nbsp; &nbsp;{{$totalprice}}</p></br>
 
                     </div>
                     <div class="card-action">
-                        item types :&nbsp; &nbsp; &nbsp;{{$totalitems}}
+                      <p>  item types :&nbsp; &nbsp; &nbsp;{{$totalitems}}
 
                         </p>
                     </div>
@@ -46,9 +46,11 @@ use Illuminate\Support\Facades\Auth;
         </div>
     </div>
     {{--price and quantity ends here. --}}
+
+
     {{--cart items adding using a loop--}}
-    @if(Auth::check())
-    <?php  $CartItems = Cart::where('customer_id',Auth::user()->id)->get();  ?>
+
+    {{$CartItems=Cart::where('customer_id',Auth::user()->id)->get()}}
 
         {{--all cart items assinged by a loop--}}
        <div class="collection">
@@ -57,13 +59,17 @@ use Illuminate\Support\Facades\Auth;
             Quantity : {{$item->qunatity}}  </br>
                 Price of Items : {{$item->qunatity*$item->price}}
 
-                <a href="{{route('deletefromCart',['btn_id' =>$item->id])}}" class="waves-effect waves-light btn">Remove</a>
+                <a href="{{route('deletefromCart',['btn_id' =>$item->id])}}"
+                   class="waves-effect waves-light btn">Remove</a>
             </a>
             @endforeach
         </div>
 
+
     <a href="{{route('proceedOrder')}}" id="proceed_btn"
        class="waves-effect waves-light btn" type="submit" name="action">Proceed The Order<i class="material-icons right">send</i></a>
+
+`
 
 @endsection
 

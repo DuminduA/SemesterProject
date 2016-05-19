@@ -15,12 +15,19 @@
             <li><a href="#">Contact Us</a></li>
             <li><a href="#">Return Item</a></li>
             <li><a href="#">About Us</a></li>
-            <li><a href="#">Sign In</a></li>
+            @if(Auth::check())
+            <li><a href="{{route('signout')}}">Sign Out</a></li>
+                @else
+                    <li><a href="{{url('signinform')}}">Sign In</a></li>
+
+                @endif
+
+
 
 
 
             <!-- Dropdown Trigger -->
-            <li><a class="dropdown-button" href="" data-activates="dropdown1">My Account<i class="material-icons right">arrow_drop_down</i></a></li>
+            <li><a class="dropdown-button" href="" data-activates="dropdown1">My Account<i class="material-icons right"></i></a></li>
         </ul>
     </div>
 </nav>

@@ -50,17 +50,13 @@ class OrderController extends Controller
         }
         else{$message= "Order Unsuccefull. ";}
 
-
-        
         return redirect()->route('/placeanorder');
     }
-
-
 
     public function getPlaceOrderPage(){
         return view('Pages_my.PlaceOrder');
     }
-    
+
     public function UpdateAnOrder(){
 
         $Orders=Order::where("customer_id",Auth::user()->customer_id)->get();
@@ -69,6 +65,10 @@ class OrderController extends Controller
     }
 
     public function CancelAnOrder(){
-        return 'this is cancel n order method';
-    }
+        return 'this is cancel n order method';}
+
+
+
+    
+
 }

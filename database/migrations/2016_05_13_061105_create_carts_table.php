@@ -24,8 +24,6 @@ class CreateCartsTable extends Migration
             $table->integer('qunatity')->unsigned();
             $table->timestamps();
 
-
-
         });
     }
     

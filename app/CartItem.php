@@ -10,4 +10,10 @@ class CartItem extends Model
 
         return $this->belongsTo(Order::class);
     }
+    
+    public function items(){
+        
+        return $this->belongsTo(Item::class);
+        
+    }
 }

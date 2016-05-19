@@ -2,14 +2,14 @@
 @extends('layouts.master')
 
 @section('title')
-    Sugn in Forum
+    Sign in Forum
 
 @endsection
 
 @section('contain')
     <div class="row">
         <div class="col-sm-6"></div>
-        <h3>Sign Up Form</h3>
+        <h3>Sign in Form</h3>
         <form action="{{route('signin')}}" method="post">
             <div class="row">
                 <div class="input-field col s6">
@@ -30,6 +30,9 @@
             <button type="submit" class="btn waves-effect waves-light left submit " >Submit</button>
             {{--<div class="alert-success"></div>--}}
         </form>
+    </div>
+    <div class="row">
+        <a href="{{url('signup')}}" class="bg-warning"></a>
     </div>
 
     <div class="alert-danger">

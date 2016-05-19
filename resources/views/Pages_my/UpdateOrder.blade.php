@@ -39,6 +39,10 @@ use App\Http\Controllers\OrderController;
 
         </tr>
         @endforeach
+
+
+
+
         </tbody>
     </table>
 
