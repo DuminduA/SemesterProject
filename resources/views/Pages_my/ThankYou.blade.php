@@ -23,7 +23,9 @@
 
     @endif
 
-    <button href="" id="ThankUbtn"  >Back to Home page</button>
+    <div class="row">
+        <a id="request_btn" href="{{route('searchItem')}}" class="btn waves-effect waves-light" name="action">Back Home </a>
+    </div>
 
 
 @endsection

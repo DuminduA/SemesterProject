@@ -13,13 +13,15 @@
             <div class="row">
                 <div class="input-field col s6">
                     {{--<i class="material-icons">perm_identity</i>--}}
-                    <label for="first_name" class="active">Your First Name</label>
-                    <input class="validate" type="text" name="first_name" id="first_name">
+
+                    <label for="first_name" class="active">Your Last Name</label>
+                    <input class="validate" type="text" name="first_name" id="first_name"  onblur="this.value=this.value.toUpperCase()" required>
                 </div>
                 <div class="input-field col s6">
                     {{--<i class="material-icons">perm_identity</i>--}}
-                    <input id="last_name" type="text" class="validate valid" name="last_name">
-                    <label for="last_name" class="active">Last Name</label>
+                    <label for="last_name" class="active" >Last Name</label>
+                    <input id="last_name" type="text" class="validate valid" name="last_name" onblur="this.value=this.value.toUpperCase()" required>
+
                 </div>
             </div>
 

@@ -106,8 +106,10 @@ Route::group(['middleware'=>['web']],function(){
 
     Route::get('/PlaceOrder', [
         'as' => 'PlaceOrder',
-        'uses' => 'CartController@getPlaceOrder']
-    );
+        'uses' => 'CartController@getPlaceOrder',
+        'middleware'=>'auth'
+
+    ]);
 
     /*/////////////////////////////////////////////////////////////////////////////////////////////////*/
     //Update The Order Button
@@ -177,10 +179,20 @@ Route::group(['middleware'=>['web']],function(){
     Route::post('/adressEdit',[
         'uses'=>'MyProfileController@adressEdit',
         'as'=>'adressEdit'
-        
+
     ]);
 
-    Route::get('/', function () {                   //open signup form
+    Route::get('/return',[
+        'uses'=>'ReturnItemController@getReturn',
+        'as'=> 'return'
+    ]);
+    
+    Route::post('/table',[
+        'uses'=>'ReturnItemController@table',
+        'as'=>'table'
+    ]);
+
+    Route::get('/Welcome', function () {                   //open signup form
         return view('Home');
     });
 
