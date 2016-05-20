@@ -23,7 +23,6 @@ use Illuminate\Support\Facades\Auth;
             <th data-field="Total Price">Total price</th>
             <th data-field="Total Quantity">Total Quantity</th>
             <th data-field="Status">Status of Your Order</th>
-            <th data-field="Cancelled">Cancellation</th>
             <th data-field="Ordered_date">Ordered date</th>
 
         </tr>
@@ -37,14 +36,19 @@ use Illuminate\Support\Facades\Auth;
         <tr>
             <td>{{$Order->id}}</td>
             <td>{{$Order->totalPrice}}</td>
-            <td>{{$Order->totalQuantiy}}</td>
-            <td>{{$Order->status}}</td>
+            <td>{{$Order->tolalQuantity}}</td>
             <td>{{$Order->Cancel}}</td>
             <td>{{date('F d, Y', strtotime($Order->created_at))}}</td>
-            <td><a href="{{route('Updatebutton',['btn_id'=>$Order->id])}}"
-                   class="waves-effecst waves-light btn">Update</a></td>
-            <td><a href="{{route('Cancelbutton',['btn_id'=>$Order->id])}}"
-                   class="waves-effect pink btn">Cancel</a></td>
+            <td>@if(($Order->Cancel=="New Order")||($Order->Cancel=="Proceeded"))
+                    <a href="{{route('Updatebutton',['btn_id'=>$Order->id])}}"
+                       class="waves-effecst waves-light btn">Update</a>
+                @endif
+            </td>
+            <td>@if(($Order->Cancel=="New Order"))
+                    <a href="{{route('Cancelbutton',['btn_id'=>$Order->id])}}"
+                        class="waves-effect pink btn">Cancel</a>
+                @endif
+            </td>
         </tr>
         @endforeach
         </tbody>

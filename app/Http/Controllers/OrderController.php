@@ -26,11 +26,15 @@ class OrderController extends Controller
             $totalprice += $cartitems[$i]->price*$cartitems[$i]->qunatity;
             $totalQuantity+= $cartitems[$i]->qunatity;
         }
+        if (sizeof($cartitems)==0){
+            $message= "No Items in the cart. ";
+            return view('/Pages_my/ThankYou')->with('message',$message);
+        }
         $Order = new Order();
         $Order->totalPrice= $totalprice;
         $Order->customer_id=$customer->id;
         $Order->tolalQuantity=$totalQuantity;
-        $Order->status=false;
+        $Order->Cancel="New Order";
         $sucess1=$Order->save();
 
         for($i=0; $i<sizeof($cartitems);$i++){
@@ -50,8 +54,10 @@ class OrderController extends Controller
                 $Item->delete();
             $message= "Order Succesfull.";
              //after order proceed cart should be empty s
+        }else{
+            $message= "Order Unsuccefull. ";
         }
-        else{$message= "Order Unsuccefull. ";}
+
         return view('/Pages_my/ThankYou')->with('message',$message);
     }
 

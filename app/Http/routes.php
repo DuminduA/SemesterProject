@@ -88,7 +88,8 @@ Route::group(['middleware'=>['web']],function(){
 
     Route::get('/UpdateOrder', [
         'as' => 'UpdateOrder',
-        'uses' => 'OrderController@UpdateAnOrder'
+        'uses' => 'OrderController@UpdateAnOrder',
+        'middleware'=>'auth'
     ]);
 
     Route::post('/placeRequest',[
@@ -139,8 +140,9 @@ Route::group(['middleware'=>['web']],function(){
         /// confirm the password to cancel the order
     Route::post('confirmpassword', [
             'as' => 'confirmpassword',
-            'uses' => 'OrderController@CancelAnOrder']
-    );
+            'uses' => 'OrderController@CancelAnOrder',
+            'middleware'=>'auth'
+    ]);
 
 //////////////////////to Update Order change quantity
 
