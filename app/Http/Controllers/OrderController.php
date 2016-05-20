@@ -49,7 +49,7 @@ class OrderController extends Controller
             $cartitem->itemID=$cartitems[$i]->ItemID;
             $cartitem->category=$item->category;
             $cartitem->sellPrice=$item->sellPrice;
-            $cartitem->quantity=$item->quantity;
+            $cartitem->quantity=$cartitems[$i]->qunatity;
             $sucess2=$Order->cartitems()->save($cartitem);
         }
 

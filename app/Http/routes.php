@@ -179,6 +179,14 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'adressEdit'
         
     ]);
+
+    Route::get('/', function () {                   //open signup form
+        return view('Home');
+    });
+
+
+
+
 });
 
  
