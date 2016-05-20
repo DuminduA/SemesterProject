@@ -18,8 +18,9 @@
                 </div>
                 <div class="input-field col s6">
                     {{--<i class="material-icons">perm_identity</i>--}}
-                    <input id="last_name" type="text" class="validate valid" name="last_name">
-                    <label for="last_name" class="active" onblur="this.value=this.value.toUpperCase()">Last Name</label>
+                    <label for="last_name" class="active" >Last Name</label>
+                    <input id="last_name" type="text" class="validate valid" name="last_name" onblur="this.value=this.value.toUpperCase()">
+
                 </div>
             </div>
 

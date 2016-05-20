@@ -41,8 +41,8 @@
                 </div>
                 <div class="row">
                     <form action="{{route('nameEdit')}}" method="post">
-                        <input class="active" id="t0" name="t0" type="text" style="display: none" required>
-                        <input class="active" id="t1" name="t1" type="text" style="display: none" required>
+                        <input class="active" id="t0" name="t0" type="text" style="display: none" required onblur="this.value=this.value.toUpperCase()">
+                        <input class="active" id="t1" name="t1" type="text" style="display: none" required onblur="this.value=this.value.toUpperCase()">
                         <button id="c1" type="submit" onclick="OKd('b1','c1','t0','t1');" class="sideviewtoggle myButton" style='display:none;'>OK</button>
                         <input type="hidden" name="_token" value="{{Session::token()}}">
                     </form>
@@ -90,7 +90,7 @@
                 </div>
                 <div class="row">
                     <form action="{{route('adressEdit')}}" method="post">
-                        <input class="active" id="t4" name="t4" type="text" style="display: none">
+                        <input class="active" id="t4" name="t4" type="text" style="display: none" onblur="this.value=this.value.toUpperCase()">
                         <button id="c4" type="submit" onclick="OK('b4','c4','t4');" class="sideviewtoggle myButton" style='display:none;'>OK</button>
                         <input type="hidden" name="_token" value="{{Session::token()}}">
                     </form>

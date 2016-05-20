@@ -22,7 +22,7 @@ class CustomerRequestController extends Controller{
         $currentDate = date('Y-m-d');
         $placedate = $request['due'];
         if ($placedate<=$currentDate){
-            return view('searchItem', ['items' => $items,'heading'=>$heading])->with('Error',"Date should be greater than current date.");
+            return view('request', ['items' => $items,'heading'=>$heading])->with('Error',"Date should be greater than current date.");
         }
         $place = new CustomerRequest();
         $place->name = $request['name'];

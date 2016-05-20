@@ -45,8 +45,6 @@ use Illuminate\Support\Facades\Auth;
                    class="waves-effecst waves-light btn">Update</a></td>
             <td><a href="{{route('Cancelbutton',['btn_id'=>$Order->id])}}"
                    class="waves-effect pink btn">Cancel</a></td>
-
-
         </tr>
         @endforeach
         </tbody>

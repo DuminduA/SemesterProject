@@ -11,21 +11,21 @@ use App\Http\Requests;
 class CartController extends Controller
 {
 
-        public function getPlaceOrder(){
-             $TotalPrice=0;
-             $TotalItems=0;
-             $userId=   Auth::user();
-             $CartItems= Cart::where('customer_id',$userId->id)->get();
-            
-            for($i = 0; $i<sizeof($CartItems)  ;$i++){
-                $TotalPrice += $CartItems[$i]->price*$CartItems[$i]->qunatity;
-                $TotalItems += 1;
-            }
+    public function getPlaceOrder(){
+         $TotalPrice=0;
+         $TotalItems=0;
+         $userId=   Auth::user();
+         $CartItems= Cart::where('customer_id',$userId->id)->get();
+        
+        for($i = 0; $i<sizeof($CartItems)  ;$i++){
+            $TotalPrice += $CartItems[$i]->price*$CartItems[$i]->qunatity;
+            $TotalItems += 1;
+        }
 
-             return view('Pages_my.PlaceOrder')
-               ->with(['totalprice'=> $TotalPrice])
-                ->with(['totalitems'=>$TotalItems])
-                ->with(['CartItems'=>$CartItems->all()]);
+         return view('Pages_my.PlaceOrder')
+           ->with(['totalprice'=> $TotalPrice])
+            ->with(['totalitems'=>$TotalItems])
+            ->with(['CartItems'=>$CartItems->all()]);
     }
     
     
