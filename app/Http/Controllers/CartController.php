@@ -40,10 +40,9 @@ class CartController extends Controller
         $cart->Price = $item->sellPrice;
         $cart->qunatity = $request['quantity'];
         $cart->ItemID=$item->id;
-//        $cart->itemID = $item->itemID;
         $customer->cart()->save($cart);
-        $newQuantity = $item->quantity - $request['quantity'];
-        Item::where('id',$item->id)->update(['quantity'=>$newQuantity]);
+        //$newQuantity = $item->quantity - $request['quantity'];
+        //Item::where('id',$item->id)->update(['quantity'=>$newQuantity]);
         $message = "Item added to cart succesfully.";
         return redirect()->route('searchItem')->with(['message'=>$message]);
     }

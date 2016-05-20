@@ -53,6 +53,7 @@ body {
 .card-content h2 {
     font-size: 50px;
     text-align: center ;
+    color: #303F9F;
     /*margin-bottom: 0;*/
     font-family: 'Montserrat', sans-serif;
 }

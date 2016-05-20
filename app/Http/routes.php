@@ -10,6 +10,8 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+use App\Attendance;
+use App\attsheet;
 
 Route::group(['middleware'=>['web']],function(){
 
@@ -88,7 +90,8 @@ Route::group(['middleware'=>['web']],function(){
 
     Route::get('/UpdateOrder', [
         'as' => 'UpdateOrder',
-        'uses' => 'OrderController@UpdateAnOrder'
+        'uses' => 'OrderController@UpdateAnOrder',
+        'middleware'=>'auth'
     ]);
 
     Route::post('/placeRequest',[
@@ -139,8 +142,9 @@ Route::group(['middleware'=>['web']],function(){
         /// confirm the password to cancel the order
     Route::post('confirmpassword', [
             'as' => 'confirmpassword',
-            'uses' => 'OrderController@CancelAnOrder']
-    );
+            'uses' => 'OrderController@CancelAnOrder',
+            'middleware'=>'auth'
+    ]);
 
 //////////////////////to Update Order change quantity
 
@@ -201,13 +205,9 @@ Route::group(['middleware'=>['web']],function(){
 
 });
 
- 
- 
-
-
-
-
-
+Route::get('aboutUs',function(){
+    return view ('aboutUs');
+});
 
 
 
