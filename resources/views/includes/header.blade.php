@@ -8,9 +8,10 @@
 </ul>
 <nav>
     <div class="nav-wrapper">
-        <a href="#!" class="brand-logo">Logo</a>
+        <img src="photos/logo.jpg" class="brand-logo" style="width:64px;height:64px;">
         <ul class="right hide-on-med-and-down">
-            <li><a href="{{URL::to('searchItem')}}">Home</a></li>
+            <li><a href="{{URL::to('Home')}}">Home</a></li>
+            <li><a href="{{URL::to('searchItem')}}">Search Item</a></li>
             <li><a href="#">Continue Shopping</a></li>
             <li><a href="#">Return Item</a></li>
             <li><a href="{{URL::to('aboutUs')}}">About Us</a></li>
@@ -20,10 +21,6 @@
                     <li><a href="{{url('signup')}}">Sign up</a></li>
 
                 @endif
-
-
-
-
 
             <!-- Dropdown Trigger -->
             <li><a class="dropdown-button" href="" data-activates="dropdown1">My Account<i class="material-icons right"></i></a></li>
