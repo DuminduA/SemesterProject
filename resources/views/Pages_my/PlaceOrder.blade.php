@@ -63,7 +63,7 @@ use Illuminate\Support\Facades\Auth;
                 Price of Items : {{$item->qunatity*$item->price}}
 
                 <a href="{{route('deletefromCart',['btn_id' =>$item->id])}}"
-                   class="waves-effect waves-light btn">Remove</a>
+                   name="Remove" class="waves-effect waves-light btn">Remove</a>
 
             </a>
             @endforeach

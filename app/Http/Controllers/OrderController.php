@@ -26,10 +26,13 @@ class OrderController extends Controller
             $totalprice += $cartitems[$i]->price*$cartitems[$i]->qunatity;
             $totalQuantity+= $cartitems[$i]->qunatity;
         }
-        if (sizeof($cartitems)==0){
-            $message= "No Items in the cart. ";
+
+
+        if(sizeof($cartitems)==0){
+            $message= "No items in the cart. ";
             return view('/Pages_my/ThankYou')->with('message',$message);
         }
+
         $Order = new Order();
         $Order->totalPrice= $totalprice;
         $Order->customer_id=$customer->id;

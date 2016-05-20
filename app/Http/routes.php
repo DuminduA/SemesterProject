@@ -195,6 +195,14 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'ReturnItemController@table',
         'as'=>'table'
     ]);
+
+    Route::get('/Welcome', function () {                   //open signup form
+        return view('Home');
+    });
+
+
+
+
 });
 
 Route::get('aboutUs',function(){
