@@ -11,21 +11,21 @@ use App\Http\Requests;
 class CartController extends Controller
 {
 
-        public function getPlaceOrder(){
-             $TotalPrice=0;
-             $TotalItems=0;
-             $userId=   Auth::user();
-             $CartItems= Cart::where('customer_id',$userId->id)->get();
-            
-            for($i = 0; $i<sizeof($CartItems)  ;$i++){
-                $TotalPrice += $CartItems[$i]->price*$CartItems[$i]->qunatity;
-                $TotalItems += 1;
-            }
+    public function getPlaceOrder(){
+         $TotalPrice=0;
+         $TotalItems=0;
+         $userId=   Auth::user();
+         $CartItems= Cart::where('customer_id',$userId->id)->get();
+        
+        for($i = 0; $i<sizeof($CartItems)  ;$i++){
+            $TotalPrice += $CartItems[$i]->price*$CartItems[$i]->qunatity;
+            $TotalItems += 1;
+        }
 
-             return view('Pages_my.PlaceOrder')
-               ->with(['totalprice'=> $TotalPrice])
-                ->with(['totalitems'=>$TotalItems])
-                ->with(['CartItems'=>$CartItems->all()]);
+         return view('Pages_my.PlaceOrder')
+           ->with(['totalprice'=> $TotalPrice])
+            ->with(['totalitems'=>$TotalItems])
+            ->with(['CartItems'=>$CartItems->all()]);
     }
     
     
@@ -45,7 +45,7 @@ class CartController extends Controller
         $newQuantity = $item->quantity - $request['quantity'];
         Item::where('id',$item->id)->update(['quantity'=>$newQuantity]);
         $message = "Item added to cart succesfully.";
-        return redirect()->route('searchItem')->with(['massage'=>$message]);
+        return redirect()->route('searchItem')->with(['message'=>$message]);
     }
 
     public function removeFromCart($btn_id){

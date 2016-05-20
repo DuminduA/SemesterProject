@@ -25,7 +25,7 @@
                        name="password" id="password" >
 
             <input type="hidden" name="btn_id" value="{{$btn_id}}">
-            <a href="{{route('back')}}" id="back" class="waves-effect green btn" type="submit">Back </a>
+            <a href="{{route('UpdateOrder')}}" id="back" class="waves-effect green btn" type="submit">Back </a>
 
              <button href="{{route('confirmpassword')}}" id="OK"
                      class="waves-effect red btn" type="submit">OK.Cancel The Order</button>
