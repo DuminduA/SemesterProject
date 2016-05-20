@@ -10,6 +10,8 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+use App\Attendance;
+use App\attsheet;
 
 Route::group(['middleware'=>['web']],function(){
 
@@ -193,13 +195,9 @@ Route::group(['middleware'=>['web']],function(){
     ]);
 });
 
- 
- 
-
-
-
-
-
+Route::get('aboutUs',function(){
+    return view ('aboutUs');
+});
 
 
 
